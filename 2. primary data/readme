@@ -1,0 +1,11 @@
+4 file 
+  obj.txt
+  feature.txt
+  pre.txt
+  location_special.txt
+được tạo sẵn
+
+2 file 
+  caugiay_processed.json
+  ner.txt
+sẽ tùy từng bộ dữ liệu csv địa chỉ

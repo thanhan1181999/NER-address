@@ -1,0 +1,13 @@
+process_caugiay_data.py đọc dữ liệu caugiay.csv
+  cho ra 2 file gồm:
+    ner.txt lưu tên của các đối tượng được đặt tên
+    caugiay_processed.json là dữ liệu cầu giấy đã tiền xử lý
+
+Đầu tiên dữ liệu cầu giấy dạng như sau:
+  ![alt text]()
+
+
+
+
+
+

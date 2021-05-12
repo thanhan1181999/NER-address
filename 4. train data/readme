@@ -1,0 +1,4 @@
+có 3 tạp dữ liệu train nhỏ:
+  ner => ner + form
+  (location => location + form) vs (special => special + form)
+  location

@@ -1,0 +1,30 @@
+xung_quanh	PRE
+
+quanh	PRE
+
+gần	PRE
+
+tại	PRE
+
+cạnh	PRE
+
+bên_cạnh	PRE
+
+đối_diện	PRE
+
+ở	PRE
+
+ở_tại	PRE
+
+ở_bên_cạnh	PRE
+
+ở_xung_quanh	PRE
+
+ở_gần	PRE
+
+ở_quanh	PRE
+
+ở_cạnh	PRE
+
+ở_đối_diện	PRE
+
