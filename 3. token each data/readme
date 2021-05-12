@@ -6,3 +6,18 @@ kết quả tạo ra 6 file gồm:
   location_special.txt    đã token và đánh tag
   location_ner.txt        đã token và đánh tag
   location_all.txt        = location.txt + location_special.txt
+
+
+Chú ý: chỉ các trường sau được tách:
+ - số nhà
+ - tên đường
+ - địa chỉ được đặt tên
+ - đặc điểm đối tượng
+
+Các trường sau không cần tách vì chúng cần để nguyên để nhận biết:
+  - xã
+  - huyện
+  - tỉnh
+  - đối tượng
+  - pre
+  - location_special

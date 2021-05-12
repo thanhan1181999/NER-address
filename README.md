@@ -12,9 +12,6 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 	4. Đánh giá model
 # IV. Sử dụng Model thông qua API Flask, Ngrok
 
-* Cần có thư mục models và VnCoreNLP-1.1.1.jar của thư viện tách từ VnCoreNLP
-* Train bộ tách từ RDR để xử lý câu tìm kiếm khi đưa vào model để dự đoán (Đã train với các câu huấn luyện hiện có)
-
 <div style='page-break-after:always;'></div>
 
 # I. Cài đặt môi trường
@@ -32,7 +29,7 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 ## 2. Các file cần cài đặt
   [cc.vi.300.bin](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.vi.300.bin.gz) là mô hình CBOW Word vectors được xây dựng sẵn của facebook
 
-  [Công cụ tách từ tiếng việt VNcoreNLP](https://github.com/vncorenlp/VnCoreNLP)
+  [Công cụ tách từ tiếng việt VNcoreNLP](https://github.com/vncorenlp/VnCoreNLP), lấy thư mục models
   
   [char_vocab_VISCII](https://drive.google.com/file/d/17RPRvk6A0i9TPiqdzsaFY0Z-k260e_Kw/view?usp=sharing)
   
@@ -42,11 +39,13 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 ## 1. Xử lý dữ liệu cầu giấy csv
 
 ### Thực hiện:
-  python 1. data csv/process_caugiay_data.py
+  cd 1. data csv
+  python process_caugiay_data.py
 ### Kết quả:
     cho ra 2 file gồm:
       ner.txt lưu tên của các đối tượng được đặt tên
       caugiay_processed.json là dữ liệu cầu giấy đã tiền xử lý
+  ![alt text](./1.%20data%20csv/kết%20quả%20cmd.png)
 ### Giải thích:
     chương trình này sẽ xử lý dữ liệu dữ liệu cầu giấy csv
 
@@ -73,17 +72,16 @@ graph LR
     - nếu có chứa ["phố ","đường","duong","ngách","hẻm","ngõ","lô","tổ"], thì sẽ bỏ từ chỗ bắt đầu đoạn text đến hết
 	
   > Bước 4: loại bỏ những bản ghi trùng lặp
-
-    sau khi token
-    - những word là số=> <number>
-    - word có dạng 12/13=> <hẻm>
-    - word có dạng 12/13/14=> <ngách>
-    - word có dạng 10000=> <postcode>
-    sau đó sẽ lọc trùng lặp    
-
+    Các trường số nhà, đường, xã, huyện, tỉnh, quốc gia của một bản ghi được tách bởi VNcoreNLP, ta được một mảng các từ
+    - những từ là số=> <number>
+    - từ có dạng 12/13=> <hẻm>
+    - từ có dạng 12/13/14=> <ngách>
+    - từ có dạng 10000=> <postcode>
+    sau đó nối các từ trong mảng thành một câu, dùng các câu này để lọc bản ghi trùng lặp
 ## 	2. Tách dữ liệu sử dụng VNcoreNLP
 ### Thực hiện:
-			python 3. token each data/each_db_of_tab.py
+      cd 3. token each data
+			python each_db_of_tab.py
 ### Kết quả:
 			6 file
 				obj.txt                 bao gồm obj+feature đã token và đánh tag
@@ -94,9 +92,10 @@ graph LR
 				location_all.txt        = location.txt + location_special.txt
 ## 3. Tạo dữ liệu train
 ### Thực hiện:
-			python 4. train data/create_data_train_1.py
-			python 4. train data/create_data_train_2.py
-			python 4. train data/create_data_train_3.py
+      cd 4. train data
+			python create_data_train_1.py
+			python create_data_train_2.py
+			python create_data_train_3.py
 ### Kết quả:
     6 file:
     > 1_data_train_location_ner_form.txt: 
@@ -112,15 +111,19 @@ graph LR
     > 3_data_train_no_tag_location.txt
 ### giải thích:
     chúng ta có 3 tập train theo nội dung của file
+    > câu tìm kiếm là địa chỉ đơn giản 
+    > câu tìm kiếm phức tạp tạo từ địa chỉ đơn giản
+    > câu tìm kiếm phức tạp tạo từ địa chỉ được đặt tên
 
 <div style='page-break-after:always;'></div>
 
 # III.Train và đánh giá model
 ##  1. Lấy char_encode, word_embedd, char_embedd từ dữ liệu train
 ### Thực hiện:
-      python 5. train data to model input/get_tag_embedd.py
+      cd 5. train data to model input
+      python get_tag_embedd.py
       
-      python 5. train data to model input/char_to_encode.py
+      python char_to_encode.py
 
       chạy file get_word_embedd.ipynb trên colab, cần config các thông số:
         link file cc.vi.300.bin là model fasttext lấy word embedd
@@ -166,6 +169,15 @@ graph LR
 ### Kết quả
     API sử dụng models
   ![alt text](./7.%20API/review%20sử%20dụng%20API.png)
+
+### Chú ý:
+* Train bộ tách từ RDR để tách câu tìm kiếm khi đưa vào model để dự đoán (Đã train với các câu huấn luyện hiện có)
+* chạy python 4. train data/concate_sentence.py, kết quả: được 3 file 
+  - 1_cautruyvan_token.txt
+  - 2_cautruyvan_token.txt
+  - 3_cautruyvan_token.txt
+  là dữ liệu train cho mô hình tách từ RDR
+* [model tách từ RDR đã train lại theo các câu huấn luyện](https://drive.google.com/file/d/1hiYg2Elg-PbXl81KM4IqZuLJF-x8nR-H/view?usp=sharing), đặt vào trong thư mục models/wordsegmenter của VncoreNLP, và sử dụng với giao diện của VncoreNLP
 
 
 
