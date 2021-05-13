@@ -2,44 +2,46 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 
 # Tóm tắt các bước chạy
 1. Xử lý dữ liệu cầu giấy
-  cd 1.\ data\ csv
-  python process_caugiay_data.py
+  - cd 1.\ data\ csv
+  - python process_caugiay_data.py
 
 2. Token dữ liệu từng loại (token số nhà, token tên đường, các dữ liệu còn lại gán nhãn ngay không cần token)
-  cd 3.\ token\ each\ data
-  python each_db_of_tab.py
+  - cd 3.\ token\ each\ data
+  - python each_db_of_tab.py
 
 3. Tạo dữ liệu huấn luyện
-  cd 4.\ train\ data
-  python create_data_train_1.py
-  python create_data_train_2.py
-  python create_data_train_3.py
-  python concate_sentence.py
-  python concate_all_data.py
+  - cd 4.\ train\ data
+  - python create_data_train_1.py
+  - python create_data_train_2.py
+  - python create_data_train_3.py
+  - python concate_sentence.py
+  - python concate_all_data.py
 
 4. Chuyển dữ liệu huấn luyện sang dạng vector
-  cd 5.\ train\ data\ to\ model\ input
-  python char_to_encode.py
-  python get_tag_embedd.py
-  chạy get_word_embedd.ipynb trên colab
+  - cd 5.\ train\ data\ to\ model\ input
+  - python char_to_encode.py
+  - python get_tag_embedd.py
+  - chạy get_word_embedd.ipynb trên colab
 
 5. Chia dữ liệu huấn luyện và test
-  chạy split_data_train.ipynb trên colab
+  - chạy split_data_train.ipynb trên colab
 
 6. Huấn luyện mô hình
-  chạy model.ipynb trên colab
+  - chạy model.ipynb trên colab
 
 7. Đánh giá mô hình
-  chạy evaluate_model.ipynb trên colab
+  - chạy evaluate_model.ipynb trên colab
 
 8. Train lại bộ tách từ:
-  javac -encoding UTF-8 DataPreprocessor.java
-  java DataPreprocessor train/Train_gold.txt
-  cd train
-  python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+  - javac -encoding UTF-8 DataPreprocessor.java
+  - java DataPreprocessor train/Train_gold.txt
+  - cd train
+  - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
 
 9. Chạy mô hình qua API
-  chạy main_have_char_embedd.ipynb trên colab
+  - chạy main_have_char_embedd.ipynb trên colab
+
+<div style='page-break-after:always;'></div>
 
 # Giải thích chi tiết các bước chạy
 # I. Cài đặt môi trường
@@ -190,6 +192,8 @@ graph LR
 
 ### Kết quả
     Quan sát được độ acc, confused matrix, độ đo P R F1 của các tag
+
+<div style='page-break-after:always;'></div>
 
 # IV. Sử dụng Model thông qua API flask ngrok
 ## 1. Train lại bộ tách từ RDR
