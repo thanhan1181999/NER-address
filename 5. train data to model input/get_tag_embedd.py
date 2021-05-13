@@ -36,14 +36,18 @@ def map_number_and_punct(word):
         word = u'<punct>'
     return word
 #============================get tag_list=====================================
-word_list_1, tag_list_1, num_sent_1, max_length_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
-name_of_out_file_1 = 'tag_embedd_1.txt'
+# word_list_1, tag_list_1, num_sent_1, max_length_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
+# name_of_out_file_1 = 'tag_embedd_1.txt'
 
-word_list_2, tag_list_2, num_sent_2, max_length_2 = read_conll_format('../4. train data/2_data_train_location_form.txt')
-name_of_out_file_2 = 'tag_embedd_2.txt'
+# word_list_2, tag_list_2, num_sent_2, max_length_2 = read_conll_format('../4. train data/2_data_train_location_form.txt')
+# name_of_out_file_2 = 'tag_embedd_2.txt'
 
-word_list_3, tag_list_3, num_sent_3, max_length_3 = read_conll_format('../4. train data/3_data_train_location.txt')
-name_of_out_file_3 = 'tag_embedd_3.txt'
+# word_list_3, tag_list_3, num_sent_3, max_length_3 = read_conll_format('../4. train data/3_data_train_location.txt')
+# name_of_out_file_3 = 'tag_embedd_3.txt'
+
+word_list, tag_list, num_sent, max_length = read_conll_format('../4. train data/data_train.txt')
+name_of_out_file = 'tag_embedd.txt'
+
 #============================create dic of tag================================
 # def dict_of_tags(tag_list):
 #     dic = {'pad': 0}
@@ -76,12 +80,14 @@ def encode_Tag_list_by_Dic_of_tags(tag_list,dic,len_of_a_sentence):
         encodeTag_of_many_sentence.append(encode_of_a_sentence)
     return np.array(encodeTag_of_many_sentence)
 
-tag_list_encode_1 = encode_Tag_list_by_Dic_of_tags(tag_list_1,dic_of_tag,42)
-print(tag_list_encode_1.shape)
-tag_list_encode_2 = encode_Tag_list_by_Dic_of_tags(tag_list_2,dic_of_tag,42)
-print(tag_list_encode_2.shape)
-tag_list_encode_3 = encode_Tag_list_by_Dic_of_tags(tag_list_3,dic_of_tag,42)
-print(tag_list_encode_3.shape)
+# tag_list_encode_1 = encode_Tag_list_by_Dic_of_tags(tag_list_1,dic_of_tag,42)
+# print(tag_list_encode_1.shape)
+# tag_list_encode_2 = encode_Tag_list_by_Dic_of_tags(tag_list_2,dic_of_tag,42)
+# print(tag_list_encode_2.shape)
+# tag_list_encode_3 = encode_Tag_list_by_Dic_of_tags(tag_list_3,dic_of_tag,42)
+# print(tag_list_encode_3.shape)
+tag_list_encode = encode_Tag_list_by_Dic_of_tags(tag_list,dic_of_tag,42)
+print(tag_list_encode.shape)
 #==========================create one hot vector from tag_encode==========
 def create_onehot(sens_encodes, tag_dim, num_word_in_sentence,name_of_out_file):
     X = np.zeros([len(sens_encodes), num_word_in_sentence, tag_dim])
@@ -96,15 +102,12 @@ def create_onehot(sens_encodes, tag_dim, num_word_in_sentence,name_of_out_file):
     fileout.close()
     return X
 
-tag_onehot_1 = create_onehot(tag_list_encode_1, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_1)
-print(tag_onehot_1.shape)
-tag_onehot_2 = create_onehot(tag_list_encode_2, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_2)
-print(tag_onehot_2.shape)
-tag_onehot_3 = create_onehot(tag_list_encode_3, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_3)
-print(tag_onehot_3.shape)
+# tag_onehot_1 = create_onehot(tag_list_encode_1, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_1)
+# print(tag_onehot_1.shape)
+# tag_onehot_2 = create_onehot(tag_list_encode_2, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_2)
+# print(tag_onehot_2.shape)
+# tag_onehot_3 = create_onehot(tag_list_encode_3, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_3)
+# print(tag_onehot_3.shape)
 
-
-
-    
-
-    
+tag_onehot = create_onehot(tag_list_encode, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file)
+print(tag_onehot.shape)

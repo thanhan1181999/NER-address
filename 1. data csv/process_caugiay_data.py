@@ -65,10 +65,17 @@ for index in range(len(data)):
   # housenumber = data['address_parts.number'][index]
   # street = data['address_parts.street'][index]
   name = data['name.default'][index]
+  name = ' '.join( name.split() )
   layer = data['layer'][index]
   # if name!="" and (housenumber+" "+street)!=name:
   if layer=="venue":
-    caugiay_ner.append(name)
+    if len(name)<=32:
+      caugiay_ner.append(name)
+    else:
+      name = name[0:32]
+      idx = name.rindex(" ")
+      caugiay_ner.append(name[0:idx])
+
 # export to file
 ner_file = open("../2. primary data/ner.txt","a",encoding='utf8')
 for i in range(len(caugiay_ner)):

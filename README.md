@@ -1,5 +1,47 @@
 link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm1KuWKCiTgh9kWwUNXJbiF09Wkrsqb0?usp=sharing)
 
+# Tóm tắt các bước chạy
+1. Xử lý dữ liệu cầu giấy
+  cd 1.\ data\ csv
+  python process_caugiay_data.py
+
+2. Token dữ liệu từng loại (token số nhà, token tên đường, các dữ liệu còn lại gán nhãn ngay không cần token)
+  cd 3.\ token\ each\ data
+  python each_db_of_tab.py
+
+3. Tạo dữ liệu huấn luyện
+  cd 4.\ train\ data
+  python create_data_train_1.py
+  python create_data_train_2.py
+  python create_data_train_3.py
+  python concate_sentence.py
+  python concate_all_data.py
+
+4. Chuyển dữ liệu huấn luyện sang dạng vector
+  cd 5.\ train\ data\ to\ model\ input
+  python char_to_encode.py
+  python get_tag_embedd.py
+  chạy get_word_embedd.ipynb trên colab
+
+5. Chia dữ liệu huấn luyện và test
+  chạy split_data_train.ipynb trên colab
+
+6. Huấn luyện mô hình
+  chạy model.ipynb trên colab
+
+7. Đánh giá mô hình
+  chạy evaluate_model.ipynb trên colab
+
+8. Train lại bộ tách từ:
+  javac -encoding UTF-8 DataPreprocessor.java
+  java DataPreprocessor train/Train_gold.txt
+  cd train
+  python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+
+9. Chạy mô hình qua API
+  chạy main_have_char_embedd.ipynb trên colab
+
+# Giải thích chi tiết các bước chạy
 # I. Cài đặt môi trường
 # II. Tạo dữ liệu train model
 	1. Xử lý dữ liệu cầu giấy csv
@@ -11,6 +53,8 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 	3. Train model
 	4. Đánh giá model
 # IV. Sử dụng Model thông qua API Flask, Ngrok
+	1. Train lại bộ tách từ RDR
+	2. API
 
 <div style='page-break-after:always;'></div>
 
@@ -92,28 +136,18 @@ graph LR
 				location_all.txt        = location.txt + location_special.txt
 ## 3. Tạo dữ liệu train
 ### Thực hiện:
-      cd 4. train data
+			cd 4.\ train\ data
 			python create_data_train_1.py
 			python create_data_train_2.py
 			python create_data_train_3.py
+			python concate_sentence.py
+			python concate_all_data.py
 ### Kết quả:
-    6 file:
-    > 1_data_train_location_ner_form.txt: 
-      câu tìm kiếm gồm đối tượng + pre + đối tượng có tên
-    > 2_data_train_location_form.txt: 
-      câu tìm kiếm gồm đối tượng + pre + địa chỉ thông thường
-    > 3_data_train_location.txt: 
-      câu tìm kiếm là địa chỉ đơn giản
----
-    dữ liệu train nhưng thiếu tag, dùng để lấy word embedd
-    > 1_data_train_no_tag_location_ner_form.txt
-    > 2_data_train_no_tag_location_form.txt
-    > 3_data_train_no_tag_location.txt
-### giải thích:
-    chúng ta có 3 tập train theo nội dung của file
-    > câu tìm kiếm là địa chỉ đơn giản 
-    > câu tìm kiếm phức tạp tạo từ địa chỉ đơn giản
-    > câu tìm kiếm phức tạp tạo từ địa chỉ được đặt tên
+    4 file:
+      data_train.txt
+      2_data_train_location_form.txt 
+      cautruyvan.txt
+      cautruyvan_token.txt
 
 <div style='page-break-after:always;'></div>
 
@@ -127,16 +161,14 @@ graph LR
 
       chạy file get_word_embedd.ipynb trên colab, cần config các thông số:
         link file cc.vi.300.bin là model fasttext lấy word embedd
-        3 đường link file tương ứng với data train không có tag
-        3 đường link lưu kết quả output
+        1 đường link file tương ứng với data train không có tag
+        1 đường link lưu kết quả output
 ### Kết quả
-    word embedd, char encode, tag embedd của 3 tập dữ liệu train
+    word embedd, char encode, tag embedd của tập dữ liệu train
 ## 2. Chia dữ liệu train và test (tỷ lệ 8:2)
 ### Thực hiện
     Chạy 6. train model/file split_data_train.ipynb trên colab, cần config các thông số:
-        3 đường link là file char_encode, tag_embedd, word_embedd gốc
-        3 đường link lưu kết quả char_encode, tag_embedd, word_embedd train
-        3 đường link lưu kết quả char_encode, tag_embedd, word_embedd test
+        3 đường link là file char_encode, tag_embedd, word_embedd
 ### Kết quả:
     Tập dữ liệu train và tập dữ liêu test
 
@@ -160,6 +192,18 @@ graph LR
     Quan sát được độ acc, confused matrix, độ đo P R F1 của các tag
 
 # IV. Sử dụng Model thông qua API flask ngrok
+## 1. Train lại bộ tách từ RDR
+* Train bộ tách từ RDR để tách câu tìm kiếm khi đưa vào model để dự đoán (Đã train với các câu huấn luyện hiện có)
+* cautruyvan_token.txt là dữ liệu train cho mô hình tách từ RDR, được copy vào file Train_gold.txt 
+* Chú ý: trong file Train_gold.txt không chứa "_ " hoặc " _" hoặc " _ " vì _ là ký tự nối của 1 từ
+* [model tách từ RDR đã train lại theo các câu huấn luyện](https://drive.google.com/file/d/1hiYg2Elg-PbXl81KM4IqZuLJF-x8nR-H/view?usp=sharing), đặt vào trong thư mục models/wordsegmenter của VncoreNLP, và sử dụng với giao diện của VncoreNLP
+### Thực hiện
+    javac -encoding UTF-8 DataPreprocessor.java
+    java DataPreprocessor train/Train_gold.txt
+    cd train
+    python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+
+## 2. API
 ### Thực hiện
     Chạy 6. train model/evaluate_model.ipynb trên colab, cần config các thông số:
         1 đường link lưu model đã train
@@ -169,16 +213,5 @@ graph LR
 ### Kết quả
     API sử dụng models
   ![alt text](./7.%20API/review%20sử%20dụng%20API.png)
-
-### Chú ý:
-* Train bộ tách từ RDR để tách câu tìm kiếm khi đưa vào model để dự đoán (Đã train với các câu huấn luyện hiện có)
-* chạy python 4. train data/concate_sentence.py, kết quả: được 3 file 
-  - 1_cautruyvan_token.txt
-  - 2_cautruyvan_token.txt
-  - 3_cautruyvan_token.txt
-  là dữ liệu train cho mô hình tách từ RDR
-* [model tách từ RDR đã train lại theo các câu huấn luyện](https://drive.google.com/file/d/1hiYg2Elg-PbXl81KM4IqZuLJF-x8nR-H/view?usp=sharing), đặt vào trong thư mục models/wordsegmenter của VncoreNLP, và sử dụng với giao diện của VncoreNLP
-
-
 
   
