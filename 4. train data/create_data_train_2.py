@@ -18,7 +18,7 @@ class ProcessData:
     #form sentence
     self.FORM_SENTENCE_TOKENS = [
       # basic 
-      ["LOCATION"],
+      # ["LOCATION"],
       # form define
       ["OBJ","PRE","LOCATION"],
       # form 1
@@ -42,7 +42,7 @@ class ProcessData:
     ]
     self.FORM_SENTENCE_TAGS = [
       # basic 
-      ["LOCATION"],
+      # ["LOCATION"],
       # form
       ["OBJ","PRE","LOCATION"],
       # form 1

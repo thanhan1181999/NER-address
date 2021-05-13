@@ -80,8 +80,10 @@ LOCATION_SPECIAL_TOKEN = convert_data(LOCATION_SPECIAL)
 LOCATION_SPECIAL_TAG = ["LOCATION_SPECIAL"]*len(LOCATION_SPECIAL)
 #location ner
 print("LOCATION_NER doing tokens ang tags")
-LOCATION_NER_TOKEN = token_input_data(LOCATION_NER)
-LOCATION_NER_TAG   = make_tag_from_tokened_data(LOCATION_NER_TOKEN,"LOCATION_NER")
+# LOCATION_NER_TOKEN = token_input_data(LOCATION_NER)
+# LOCATION_NER_TAG   = make_tag_from_tokened_data(LOCATION_NER_TOKEN,"LOCATION_NER")
+LOCATION_NER_TOKEN = convert_data(LOCATION_NER)
+LOCATION_NER_TAG = ["LOCATION_NER"]*len(LOCATION_NER)
 #location
 print("LOCATION doing tokens ang tags")
 LOCATION_TOKEN = []
@@ -212,13 +214,21 @@ dataset.close()
 
 # LOCATION_NER
 dataset = open("location_ner.txt","a",encoding='utf8')
+# for i in range(len(LOCATION_NER_TOKEN)):
+#   for j in range(len(LOCATION_NER_TOKEN[i])):
+#     dataset.write(str(LOCATION_NER_TOKEN[i][j]))
+#     dataset.write('\t')
+#     dataset.write(str(LOCATION_NER_TAG[i][j]))
+#     dataset.write('\n')
+#   dataset.write('\n')
+
 for i in range(len(LOCATION_NER_TOKEN)):
-  for j in range(len(LOCATION_NER_TOKEN[i])):
-    dataset.write(str(LOCATION_NER_TOKEN[i][j]))
-    dataset.write('\t')
-    dataset.write(str(LOCATION_NER_TAG[i][j]))
-    dataset.write('\n')
+  dataset.write(str(LOCATION_NER_TOKEN[i]))
+  dataset.write('\t')
+  dataset.write(str(LOCATION_NER_TAG[i]))
   dataset.write('\n')
+  dataset.write('\n')
+
 dataset.close()
 
 # location homenumber + street + ward + district + province + country + postcode
