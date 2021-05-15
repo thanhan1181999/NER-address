@@ -3,6 +3,35 @@ import random
 from numpy import argmax
 import codecs
 
+import re
+def map_number_and_punct(word):
+    # check hem va ngach
+    num_of_seperate=0
+    dem=0
+    for char in word:
+      if not char.isnumeric() and char!="/":
+        dem+=1        
+      if char=="/":
+        num_of_seperate+=1
+    if dem==0:
+      if len(word)>1 and num_of_seperate==1:
+        return u'<ngach>'
+      if len(word)>1 and num_of_seperate>2:
+        return u'<hem>'
+
+    if re.match(r"^[0-9]{2}0{3}$", word):
+        return u'<postcode>'
+
+    if word.isnumeric():
+        word = u'<number>'
+    elif word in [u',', u'<', u'.', u'>', u'/', u'?', u'..', u'...', u'....', u':', u';', u'"', u"'", u'[', u'{', u']',
+                  u'}', u'|', u'\\', u'`', u'~', u'!', u'@', u'#', u'$', u'%', u'^', u'&', u'*', u'(', u')', u'-', u'+',
+                  u'=']:
+        word = u'<punct>'
+
+    # word = word.replace("_"," ")
+    return word
+
 # from data_trans import read_conll_format
 def read_conll_format(input_file):
     with codecs.open(input_file, 'r', 'utf-8') as f:
@@ -16,7 +45,7 @@ def read_conll_format(input_file):
         for line in f:
             line = line.split()
             if len(line) > 0:
-                words.append(line[0].lower())
+                words.append( map_number_and_punct(line[0].lower()) )
                 tags.append(line[1])
                 max_length_of_a_word = max(max_length_of_a_word, len(line[0]))
             else:
@@ -70,23 +99,23 @@ int_to_char = int_to_char(char_vocab_data)
 #   print(str(key)+" : "+str(int_to_char[key]))
 
 # define input string
-# word_list_3, tag_list_3, num_sent_3, max_length_3, max_length_of_a_word_3 = read_conll_format('../4. train data/3_data_train_location.txt')
-# name_of_out_file_3 = 'char_encode_3.txt'
-# word_list_2, tag_list_2, num_sent_2, max_length_2, max_length_of_a_word_2 = read_conll_format('../4. train data/2_data_train_location_form.txt')
-# name_of_out_file_2 = 'char_encode_2.txt'
+word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format('../4. train data/train/data.txt')
+name_of_out_file_train = 'train/char_encode.txt'
+word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format('../4. train data/val/data.txt')
+name_of_out_file_val = 'val/char_encode.txt'
 # word_list_1, tag_list_1, num_sent_1, max_length_1, max_length_of_a_word_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
 # name_of_out_file_1 = 'char_encode_1.txt'
 # print("max_length_of_a_sentence_1 : {}".format(max_length_1))
 # print("max_length_of_a_word_1     : {}".format(max_length_of_a_word_1))
-# print("max_length_of_a_sentence_2 : {}".format(max_length_2))
-# print("max_length_of_a_word_2     : {}".format(max_length_of_a_word_2))
-# print("max_length_of_a_sentence_3 : {}".format(max_length_3))
-# print("max_length_of_a_word_3     : {}".format(max_length_of_a_word_3))
+print("max_length_of_a_sentence_train : {}".format(max_length_train))
+print("max_length_of_a_word_train     : {}".format(max_length_of_a_word_train))
+print("max_length_of_a_sentence_val : {}".format(max_length_val))
+print("max_length_of_a_word_val     : {}".format(max_length_of_a_word_val))
 
-word_list, tag_list, num_sent, max_length, max_length_of_a_word = read_conll_format('../4. train data/data_train.txt')
-name_of_out_file = 'char_encode.txt'
+# word_list, tag_list, num_sent, max_length, max_length_of_a_word = read_conll_format('../4. train data/data_train.txt')
+# name_of_out_file = 'char_encode.txt'
 
-print(max_length_of_a_word)
+print(max_length_of_a_word_train)
 max_length_of_a_sentence = 42
 max_length_of_a_word     = 32
 
@@ -133,8 +162,8 @@ def char_encode_word_list(word_list,max_length_of_a_sentence,max_length_of_a_wor
 
 # char_encode_1 = char_encode_word_list(word_list_1,42,32,name_of_out_file_1)
 
-# char_encode_2 = char_encode_word_list(word_list_2,42,32,name_of_out_file_2)
+char_encode_train = char_encode_word_list(word_list_train,42,32,name_of_out_file_train)
 
-# char_encode_3 = char_encode_word_list(word_list_3,42,32,name_of_out_file_3)
+char_encode_val = char_encode_word_list(word_list_val,42,32,name_of_out_file_val)
 
-char_encode = char_encode_word_list(word_list,42,32,name_of_out_file)
+# char_encode = char_encode_word_list(word_list,42,32,name_of_out_file)

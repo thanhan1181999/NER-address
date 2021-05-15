@@ -71,10 +71,10 @@ for index in range(len(data)):
   if layer=="venue":
     if len(name)<=32:
       caugiay_ner.append(name)
-    else:
-      name = name[0:32]
-      idx = name.rindex(" ")
-      caugiay_ner.append(name[0:idx])
+    # else:
+    #   name = name[0:32]
+    #   idx = name.rindex(" ")
+    #   caugiay_ner.append(name[0:idx])
 
 # export to file
 ner_file = open("../2. primary data/ner.txt","a",encoding='utf8')

@@ -4,6 +4,35 @@ import codecs
 import _pickle as pickle
 import time
 
+import re
+def map_number_and_punct(word):
+    # check hem va ngach
+    num_of_seperate=0
+    dem=0
+    for char in word:
+      if not char.isnumeric() and char!="/":
+        dem+=1        
+      if char=="/":
+        num_of_seperate+=1
+    if dem==0:
+      if len(word)>1 and num_of_seperate==1:
+        return u'<ngach>'
+      if len(word)>1 and num_of_seperate>2:
+        return u'<hem>'
+
+    if re.match(r"^[0-9]{2}0{3}$", word):
+        return u'<postcode>'
+
+    if word.isnumeric():
+        word = u'<number>'
+    elif word in [u',', u'<', u'.', u'>', u'/', u'?', u'..', u'...', u'....', u':', u';', u'"', u"'", u'[', u'{', u']',
+                  u'}', u'|', u'\\', u'`', u'~', u'!', u'@', u'#', u'$', u'%', u'^', u'&', u'*', u'(', u')', u'-', u'+',
+                  u'=']:
+        word = u'<punct>'
+
+    # word = word.replace("_"," ")
+    return word
+
 def read_conll_format(input_file):
     with codecs.open(input_file, 'r', 'utf-8') as f:
         word_list = [] 
@@ -27,26 +56,25 @@ def read_conll_format(input_file):
                 max_length = max(max_length, sent_length)
     return word_list, tag_list, num_sent, max_length
 
-def map_number_and_punct(word):
-    if any(char.isdigit() for char in word):
-        word = u'<number>'
-    elif word in [u',', u'<', u'.', u'>', u'/', u'?', u'..', u'...', u'....', u':', u';', u'"', u"'", u'[', u'{', u']',
-                  u'}', u'|', u'\\', u'`', u'~', u'!', u'@', u'#', u'$', u'%', u'^', u'&', u'*', u'(', u')', u'-', u'+',
-                  u'=']:
-        word = u'<punct>'
-    return word
+# def map_number_and_punct(word):
+#     if any(char.isdigit() for char in word):
+#         word = u'<number>'
+#     elif word in [u',', u'<', u'.', u'>', u'/', u'?', u'..', u'...', u'....', u':', u';', u'"', u"'", u'[', u'{', u']',
+#                   u'}', u'|', u'\\', u'`', u'~', u'!', u'@', u'#', u'$', u'%', u'^', u'&', u'*', u'(', u')', u'-', u'+',
+#                   u'=']:
+#         word = u'<punct>'
+#     return word
 #============================get tag_list=====================================
 # word_list_1, tag_list_1, num_sent_1, max_length_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
 # name_of_out_file_1 = 'tag_embedd_1.txt'
 
-# word_list_2, tag_list_2, num_sent_2, max_length_2 = read_conll_format('../4. train data/2_data_train_location_form.txt')
-# name_of_out_file_2 = 'tag_embedd_2.txt'
+word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format('../4. train data/train/data.txt')
+name_of_out_file_train = 'train/tag_embedd.txt'
+word_list_val, tag_list_val, num_sent_val, max_length_val = read_conll_format('../4. train data/val/data.txt')
+name_of_out_file_val = 'val/tag_embedd.txt'
 
-# word_list_3, tag_list_3, num_sent_3, max_length_3 = read_conll_format('../4. train data/3_data_train_location.txt')
-# name_of_out_file_3 = 'tag_embedd_3.txt'
-
-word_list, tag_list, num_sent, max_length = read_conll_format('../4. train data/data_train.txt')
-name_of_out_file = 'tag_embedd.txt'
+word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format('../4. train data/test/data.txt')
+name_of_out_file_test = 'test/tag_embedd.txt'
 
 #============================create dic of tag================================
 # def dict_of_tags(tag_list):
@@ -65,7 +93,7 @@ name_of_out_file = 'tag_embedd.txt'
 # print(dic_of_tag)
 # print(len_of_dic_tag)
 
-dic_of_tag = {'pad': 0, 'LOCATION_HOMENUMBER': 1, 'LOCATION_STREET': 2, 'LOCATION_WARD': 3, 'LOCATION_DISTRICT': 4, 'LOCATION_PROVINCE': 5, 'LOCATION_COUNTRY': 6, 'LOCATION_POSTCODE': 7, 'LOCATION_SPECIAL': 8, 'LOCATION_NER': 9, 'OBJ': 10, 'OBJ_FEATURE': 11, 'PRE': 12, 'UNKNOW': 13 }
+dic_of_tag = {'pad': 0, 'LOCATION_HOMENUMBER': 1, 'LOCATION_STREET': 2, 'LOCATION_WARD': 3, 'LOCATION_DISTRICT': 4, 'LOCATION_PROVINCE': 5, 'LOCATION_COUNTRY': 6, 'LOCATION_POSTCODE': 7, 'LOCATION_NER': 8, 'OBJ': 9, 'OBJ_FEATURE': 10, 'PRE': 11, 'UNKNOW': 12 }
 len_of_dic_tag = len(dic_of_tag)
 #===========================encode tag_list by dic_of_tags================
 def encode_Tag_list_by_Dic_of_tags(tag_list,dic,len_of_a_sentence):
@@ -86,8 +114,12 @@ def encode_Tag_list_by_Dic_of_tags(tag_list,dic,len_of_a_sentence):
 # print(tag_list_encode_2.shape)
 # tag_list_encode_3 = encode_Tag_list_by_Dic_of_tags(tag_list_3,dic_of_tag,42)
 # print(tag_list_encode_3.shape)
-tag_list_encode = encode_Tag_list_by_Dic_of_tags(tag_list,dic_of_tag,42)
-print(tag_list_encode.shape)
+tag_list_train_encode = encode_Tag_list_by_Dic_of_tags(tag_list_train,dic_of_tag,42)
+tag_list_val_encode = encode_Tag_list_by_Dic_of_tags(tag_list_val,dic_of_tag,42)
+tag_list_test_encode = encode_Tag_list_by_Dic_of_tags(tag_list_test,dic_of_tag,42)
+print(tag_list_train_encode.shape)
+print(tag_list_val_encode.shape)
+print(tag_list_test_encode.shape)
 #==========================create one hot vector from tag_encode==========
 def create_onehot(sens_encodes, tag_dim, num_word_in_sentence,name_of_out_file):
     X = np.zeros([len(sens_encodes), num_word_in_sentence, tag_dim])
@@ -109,5 +141,9 @@ def create_onehot(sens_encodes, tag_dim, num_word_in_sentence,name_of_out_file):
 # tag_onehot_3 = create_onehot(tag_list_encode_3, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_3)
 # print(tag_onehot_3.shape)
 
-tag_onehot = create_onehot(tag_list_encode, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file)
-print(tag_onehot.shape)
+tag_onehot_train = create_onehot(tag_list_train_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_train)
+print(tag_onehot_train.shape)
+tag_onehot_val = create_onehot(tag_list_val_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_val)
+print(tag_onehot_val.shape)
+tag_onehot_test = create_onehot(tag_list_test_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_test)
+print(tag_onehot_test.shape)

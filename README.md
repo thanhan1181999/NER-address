@@ -15,30 +15,29 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python create_data_train_2.py
   - python create_data_train_3.py
   - python concate_sentence.py
-  - python concate_all_data.py
+  - python create_train_test_data.py
 
-4. Chuyển dữ liệu huấn luyện sang dạng vector
+4. Lấy char_encode, word_embedd, char_embedd từ dữ liệu huấn luyện
   - cd 5.\ train\ data\ to\ model\ input
   - python char_to_encode.py
   - python get_tag_embedd.py
   - chạy get_word_embedd.ipynb trên colab
 
-5. Chia dữ liệu huấn luyện và test
-  - chạy split_data_train.ipynb trên colab
-
-6. Huấn luyện mô hình
+5. Huấn luyện mô hình
   - chạy model.ipynb trên colab
 
-7. Đánh giá mô hình
-  - chạy evaluate_model.ipynb trên colab
+6. Đánh giá mô hình
+  - chạy evaluate_model_with_validate_data.ipynb trên colab
+  - Train lại bộ tách từ với các câu tìm kiếm trong dữ liệu huấn luyện
+      - javac -encoding UTF-8 DataPreprocessor.java
+      - java DataPreprocessor train/Train_gold.txt
+      - cd train
+      - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+      ***
+        sử dụng khi kiểm tra mô hình với dữ liệu test, khi sử dụng mô hình trong thực tế
+  - chạy evaluate_model_with_test_data.ipynb trên colab
 
-8. Train lại bộ tách từ:
-  - javac -encoding UTF-8 DataPreprocessor.java
-  - java DataPreprocessor train/Train_gold.txt
-  - cd train
-  - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
-
-9. Chạy mô hình qua API
+7. Sử dụng Model thông qua API Flask, Ngrok
   - chạy main_have_char_embedd.ipynb trên colab
 
 <div style='page-break-after:always;'></div>
@@ -48,15 +47,13 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 # II. Tạo dữ liệu train model
 	1. Xử lý dữ liệu cầu giấy csv
 	2. Tách dữ liệu sử dụng VNcoreNLP
-	3. Tạo dữ liệu train
+	3. Tạo dữ liệu huấn luyện
 # III.Train và đánh giá model
-	1. Lấy char_encode, word_embedd, char_embedd từ dữ liệu train
-	2. Chia dữ liệu train và test (tỷ lệ 8:2)
-	3. Train model
-	4. Đánh giá model
+	1. Lấy char_encode, word_embedd, char_embedd từ dữ liệu huấn luyện
+	2. Huấn luyện mô hình
+	3. Đánh giá mô hình
 # IV. Sử dụng Model thông qua API Flask, Ngrok
-	1. Train lại bộ tách từ RDR
-	2. API
+	1. API
 
 <div style='page-break-after:always;'></div>
 
@@ -136,25 +133,25 @@ graph LR
 				location_special.txt    đã token và đánh tag
 				location_ner.txt        đã token và đánh tag
 				location_all.txt        = location.txt + location_special.txt
-## 3. Tạo dữ liệu train
+## 3. Tạo dữ liệu huấn luyện
 ### Thực hiện:
 			cd 4.\ train\ data
 			python create_data_train_1.py
 			python create_data_train_2.py
 			python create_data_train_3.py
 			python concate_sentence.py
-			python concate_all_data.py
-### Kết quả:
-    4 file:
-      data_train.txt
-      2_data_train_location_form.txt 
-      cautruyvan.txt
-      cautruyvan_token.txt
+			python create_train_test_data.py
+### Kết quả: 
+    thư mục chứa dữ liệu train, validate, test (tỉ lệ 7:1:2), mỗi thư mục có các file:
+      data.txt (dữ liệu huấn luyện gán nhãn đầy đủ)
+      data_no_tag.txt (dữ liệu huấn luyện không có nhãn)
+      cautruyvan.txt (câu truy vấn của dữ liệu huấn luyện)
+      cautruyvan_token.txt (câu truy vấn của dữ liệu huấn luyện đã qua bộ tách từ)
 
 <div style='page-break-after:always;'></div>
 
 # III.Train và đánh giá model
-##  1. Lấy char_encode, word_embedd, char_embedd từ dữ liệu train
+##  1. Lấy char_encode, word_embedd, char_embedd từ dữ liệu huấn luyện
 ### Thực hiện:
       cd 5. train data to model input
       python get_tag_embedd.py
@@ -163,51 +160,45 @@ graph LR
 
       chạy file get_word_embedd.ipynb trên colab, cần config các thông số:
         link file cc.vi.300.bin là model fasttext lấy word embedd
-        1 đường link file tương ứng với data train không có tag
-        1 đường link lưu kết quả output
+        2 đường link file tương ứng với dữ liệu train, dữ liệu validate không có tag
+        2 đường link lưu kết quả output
 ### Kết quả
-    word embedd, char encode, tag embedd của tập dữ liệu train
-## 2. Chia dữ liệu train và test (tỷ lệ 8:2)
-### Thực hiện
-    Chạy 6. train model/file split_data_train.ipynb trên colab, cần config các thông số:
-        3 đường link là file char_encode, tag_embedd, word_embedd
-### Kết quả:
-    Tập dữ liệu train và tập dữ liêu test
-
-## 3. Train model
+    word embedd, char encode, tag embedd của tập dữ liệu train, dữ liệu validate
+## 3. Huấn luyện mô hình
 ### Thực hiện
     Chạy 6. train model/model.ipynb trên colab, cần config các thông số:
         3 đường link là file char_encode, tag_embedd, word_embedd train
         1 đường link lưu hình ảnh tổng quan của mô hình
-        1 đường link lưu model tốt nhất cho đến quá trình train hiện tại
         1 đường link lưu model đã train xong
 ### Kết quả
     model đã train xong
 
-## 4. Đánh giá model
+## 4. Đánh giá mô hình
 ### Thực hiện
-    Chạy 6. train model/evaluate_model.ipynb trên colab, cần config các thông số:
-        1 đường link lưu model đã train
-        3 đường link là file char_encode, tag_embedd, word_embedd test
+  - chạy evaluate_model_with_validate_data.ipynb trên colab
+  - Train lại bộ tách từ với các câu tìm kiếm trong dữ liệu huấn luyện
+      - javac -encoding UTF-8 DataPreprocessor.java
+      - java DataPreprocessor train/Train_gold.txt
+      - cd train
+      - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+      ***
+        sử dụng khi kiểm tra mô hình với dữ liệu test, khi sử dụng mô hình trong thực tế
+  - python token_test_data.py để tách câu tìm kiếm của dữ liệu test
+  - chạy get_word_embedd.ipynb trên colab được word_embedd của dữ liệu test
+  - chạy evaluate_model_with_test_data.ipynb trên colab
 
 ### Kết quả
-    Quan sát được độ acc, confused matrix, độ đo P R F1 của các tag
-
-<div style='page-break-after:always;'></div>
-
-# IV. Sử dụng Model thông qua API flask ngrok
-## 1. Train lại bộ tách từ RDR
+    Quan sát được độ acc, confused matrix, độ đo P R F1 của các nhãn với dữ liệu validate và dữ liệu test
+### Chú ý:
 * Train bộ tách từ RDR để tách câu tìm kiếm khi đưa vào model để dự đoán (Đã train với các câu huấn luyện hiện có)
 * cautruyvan_token.txt là dữ liệu train cho mô hình tách từ RDR, được copy vào file Train_gold.txt 
 * Chú ý: trong file Train_gold.txt không chứa "_ " hoặc " _" hoặc " _ " vì _ là ký tự nối của 1 từ
 * [model tách từ RDR đã train lại theo các câu huấn luyện](https://drive.google.com/file/d/1hiYg2Elg-PbXl81KM4IqZuLJF-x8nR-H/view?usp=sharing), đặt vào trong thư mục models/wordsegmenter của VncoreNLP, và sử dụng với giao diện của VncoreNLP
-### Thực hiện
-    javac -encoding UTF-8 DataPreprocessor.java
-    java DataPreprocessor train/Train_gold.txt
-    cd train
-    python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
 
-## 2. API
+<div style='page-break-after:always;'></div>
+
+# IV. Sử dụng Model thông qua API flask ngrok
+## 1. API
 ### Thực hiện
     Chạy 6. train model/evaluate_model.ipynb trên colab, cần config các thông số:
         1 đường link lưu model đã train

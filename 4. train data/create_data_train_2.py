@@ -14,7 +14,7 @@ class ProcessData:
     self.obj_tokens, self.obj_tags, self.obj_len = self.read_data("../3. token each data/obj.txt")
     self.pre_tokens, self.pre_tags, self.pre_len = self.read_data("../3. token each data/pre.txt")
     self.location_tokens, self.location_tags, self.location_len = self.read_data("../3. token each data/location.txt")
-    self.special_tokens, self.special_tags, self.special_len = self.read_data("../3. token each data/location_special.txt")
+    # self.special_tokens, self.special_tags, self.special_len = self.read_data("../3. token each data/location_special.txt")
     #form sentence
     self.FORM_SENTENCE_TOKENS = [
       # basic 
@@ -119,42 +119,42 @@ class ProcessData:
     return form_token,form_tag
 
   # ham nay thay 1 form ra thanh 1 cau cu the ( co ca tokens va tags )
-  def change_tag_to_real_text_special(self,form_token,form_tag):
-    # thay location truoc
-    if "LOCATION" in form_token:
-      index = form_token.index("LOCATION")
-      self.index_of_arr_location = (self.index_of_arr_location+1)%self.special_len
-      form_token.remove("LOCATION")
-      form_tag.remove("LOCATION")
-      form_token[index:0] = self.special_tokens[self.index_of_arr_location]
-      form_tag[index:0] =  self.special_tags[self.index_of_arr_location]
-    # thay cac thanh phan con lai
-    # co vi tri, thay form_token[vi tri do] = doi tuong khac
-    if "OBJ" in form_token:
-      index = form_token.index("OBJ")
-      self.index_of_arr_obj = (self.index_of_arr_obj+1)%self.obj_len
-      form_token.remove("OBJ")
-      form_tag.remove("OBJ")
-      form_token[index:0] = self.obj_tokens[self.index_of_arr_obj]
-      form_tag[index:0] =  self.obj_tags[self.index_of_arr_obj]
-    if "PRE" in form_token:
-      index = form_token.index("PRE")
-      self.index_of_arr_pre = (self.index_of_arr_pre+1)%self.pre_len
-      form_token.remove("PRE")
-      form_tag.remove("PRE")
-      form_token[index:0] = self.pre_tokens[self.index_of_arr_pre]
-      form_tag[index:0] =  self.pre_tags[self.index_of_arr_pre]
-    return form_token,form_tag
+  # def change_tag_to_real_text_special(self,form_token,form_tag):
+  #   # thay location truoc
+  #   if "LOCATION" in form_token:
+  #     index = form_token.index("LOCATION")
+  #     self.index_of_arr_location = (self.index_of_arr_location+1)%self.special_len
+  #     form_token.remove("LOCATION")
+  #     form_tag.remove("LOCATION")
+  #     form_token[index:0] = self.special_tokens[self.index_of_arr_location]
+  #     form_tag[index:0] =  self.special_tags[self.index_of_arr_location]
+  #   # thay cac thanh phan con lai
+  #   # co vi tri, thay form_token[vi tri do] = doi tuong khac
+  #   if "OBJ" in form_token:
+  #     index = form_token.index("OBJ")
+  #     self.index_of_arr_obj = (self.index_of_arr_obj+1)%self.obj_len
+  #     form_token.remove("OBJ")
+  #     form_tag.remove("OBJ")
+  #     form_token[index:0] = self.obj_tokens[self.index_of_arr_obj]
+  #     form_tag[index:0] =  self.obj_tags[self.index_of_arr_obj]
+  #   if "PRE" in form_token:
+  #     index = form_token.index("PRE")
+  #     self.index_of_arr_pre = (self.index_of_arr_pre+1)%self.pre_len
+  #     form_token.remove("PRE")
+  #     form_tag.remove("PRE")
+  #     form_token[index:0] = self.pre_tokens[self.index_of_arr_pre]
+  #     form_tag[index:0] =  self.pre_tags[self.index_of_arr_pre]
+  #   return form_token,form_tag
 
   def create_tokens_and_tags_of_sentence(self):
-    for i in range(len(self.obj_tokens)):
-      self.index_of_arr_form = (self.index_of_arr_form+1)%self.FORM_SENTENCE_LEN
-      form_token = self.FORM_SENTENCE_TOKENS[self.index_of_arr_form].copy()
-      form_tag   = self.FORM_SENTENCE_TAGS[self.index_of_arr_form].copy()
-      print("doing sentence {i}".format(i=i))
-      token, tag = self.change_tag_to_real_text_special(form_token,form_tag)
-      self.tokens.append(token)
-      self.tags.append(tag)
+    # for i in range(len(self.obj_tokens)):
+    #   self.index_of_arr_form = (self.index_of_arr_form+1)%self.FORM_SENTENCE_LEN
+    #   form_token = self.FORM_SENTENCE_TOKENS[self.index_of_arr_form].copy()
+    #   form_tag   = self.FORM_SENTENCE_TAGS[self.index_of_arr_form].copy()
+    #   print("doing sentence {i}".format(i=i))
+    #   token, tag = self.change_tag_to_real_text_special(form_token,form_tag)
+    #   self.tokens.append(token)
+    #   self.tags.append(tag)
 
     for i in range(len(self.location_tokens)):
       self.index_of_arr_form = (self.index_of_arr_form+1)%self.FORM_SENTENCE_LEN

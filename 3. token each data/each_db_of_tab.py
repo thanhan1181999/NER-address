@@ -19,6 +19,7 @@ LOCATION_NER        = read_data('../2. primary data/ner.txt')
 LOCATION_SPECIAL    = read_data('../2. primary data/location_special.txt')
 
 link_file_json_of_location = '../2. primary data/caugiay_processed.json'
+
 # một vài hàm cần dùng ===========================================
 # hàm trả về token các phần tử trong 1 mảng
 def token_input_data(arr):
@@ -73,17 +74,11 @@ print("PRE doing tokens ang tags")
 PRE_TOKEN = convert_data(PRE)
 PRE_TAG = ["PRE"]*len(PRE)
 #location special
-print("LOCATION_SPECIAL doing tokens ang tags")
+print("LOCATION_SPECIAL(is LOCATION_NER) doing tokens ang tags")
 # LOCATION_SPECIAL_TOKEN = token_input_data(LOCATION_SPECIAL)
 # LOCATION_SPECIAL_TAG   = make_tag_from_tokened_data(LOCATION_SPECIAL_TOKEN,"LOCATION_SPECIAL")
 LOCATION_SPECIAL_TOKEN = convert_data(LOCATION_SPECIAL)
-LOCATION_SPECIAL_TAG = ["LOCATION_SPECIAL"]*len(LOCATION_SPECIAL)
-#location ner
-print("LOCATION_NER doing tokens ang tags")
-# LOCATION_NER_TOKEN = token_input_data(LOCATION_NER)
-# LOCATION_NER_TAG   = make_tag_from_tokened_data(LOCATION_NER_TOKEN,"LOCATION_NER")
-LOCATION_NER_TOKEN = convert_data(LOCATION_NER)
-LOCATION_NER_TAG = ["LOCATION_NER"]*len(LOCATION_NER)
+LOCATION_SPECIAL_TAG = ["LOCATION_NER"]*len(LOCATION_SPECIAL)
 #location
 print("LOCATION doing tokens ang tags")
 LOCATION_TOKEN = []
@@ -144,6 +139,20 @@ with open(link_file_json_of_location) as json_file:
     LOCATION_TOKEN.append(token_of_a_sentence)
     LOCATION_TAG.append(tag_of_a_sentence)
 
+#location ner
+print("LOCATION_NER doing tokens ang tags")
+from sklearn.model_selection import train_test_split
+if len(LOCATION_NER)>len(LOCATION_TOKEN):
+  size = round(len(LOCATION_TOKEN)/len(LOCATION_NER),2)
+  ner_rest, ner_take = train_test_split(LOCATION_NER, test_size=size)
+  LOCATION_NER = ner_take
+# LOCATION_NER_TOKEN = token_input_data(LOCATION_NER)
+# LOCATION_NER_TAG   = make_tag_from_tokened_data(LOCATION_NER_TOKEN,"LOCATION_NER")
+LOCATION_NER_TOKEN = convert_data(LOCATION_NER)
+LOCATION_NER_TAG = ["LOCATION_NER"]*len(LOCATION_NER)
+LOCATION_NER_TOKEN.extend(LOCATION_SPECIAL_TOKEN)
+LOCATION_NER_TAG.extend(LOCATION_SPECIAL_TAG)
+
 #========cong viec tiep theo la noi obj vs obj_feature=====================
 FULL_OBJ_TOKEN = []
 FULL_OBJ_TAG   = [] 
@@ -177,6 +186,7 @@ for i in range(len(FULL_OBJ_TOKEN)):
 dataset.close()
 
 #pre
+# chú ý: ta sẽ lấy ngẫu nhiên len(LOCATION_TOKEN) ner 
 dataset = open("pre.txt","a",encoding='utf8')
 # for i in range(len(PRE_TOKEN)):
 #   for j in range(len(PRE_TOKEN[i])):
@@ -195,20 +205,20 @@ for i in range(len(PRE_TOKEN)):
 dataset.close()
 
 # LOCATION_SPECIAL
-dataset = open("location_special.txt","a",encoding='utf8')
+# dataset = open("location_special.txt","a",encoding='utf8')
+# # for i in range(len(LOCATION_SPECIAL_TOKEN)):
+# #   for j in range(len(LOCATION_SPECIAL_TOKEN[i])):
+# #     dataset.write(str(LOCATION_SPECIAL_TOKEN[i][j]))
+# #     dataset.write('\t')
+# #     dataset.write(str(LOCATION_SPECIAL_TAG[i][j]))
+# #     dataset.write('\n')
+# #   dataset.write('\n')
 # for i in range(len(LOCATION_SPECIAL_TOKEN)):
-#   for j in range(len(LOCATION_SPECIAL_TOKEN[i])):
-#     dataset.write(str(LOCATION_SPECIAL_TOKEN[i][j]))
-#     dataset.write('\t')
-#     dataset.write(str(LOCATION_SPECIAL_TAG[i][j]))
-#     dataset.write('\n')
+#   dataset.write(str(LOCATION_SPECIAL_TOKEN[i]))
+#   dataset.write('\t')
+#   dataset.write(str(LOCATION_SPECIAL_TAG[i]))
 #   dataset.write('\n')
-for i in range(len(LOCATION_SPECIAL_TOKEN)):
-  dataset.write(str(LOCATION_SPECIAL_TOKEN[i]))
-  dataset.write('\t')
-  dataset.write(str(LOCATION_SPECIAL_TAG[i]))
-  dataset.write('\n')
-  dataset.write('\n')
+#   dataset.write('\n')
 
 dataset.close()
 
