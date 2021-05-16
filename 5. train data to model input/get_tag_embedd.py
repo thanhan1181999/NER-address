@@ -20,8 +20,8 @@ def map_number_and_punct(word):
       if len(word)>1 and num_of_seperate>2:
         return u'<hem>'
 
-    if re.match(r"^[0-9]{2}0{3}$", word):
-        return u'<postcode>'
+    # if re.match(r"^[0-9]{2}0{3}$", word):
+    #     return u'<postcode>'
 
     if word.isnumeric():
         word = u'<number>'
@@ -76,6 +76,9 @@ name_of_out_file_val = 'val/tag_embedd.txt'
 word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format('../4. train data/test/data.txt')
 name_of_out_file_test = 'test/tag_embedd.txt'
 
+print("num_sent_train : {}".format(num_sent_train))
+print("num_sent_val     : {}".format(num_sent_val))
+print("num_sent_test : {}".format(num_sent_test))
 #============================create dic of tag================================
 # def dict_of_tags(tag_list):
 #     dic = {'pad': 0}
@@ -94,6 +97,7 @@ name_of_out_file_test = 'test/tag_embedd.txt'
 # print(len_of_dic_tag)
 
 dic_of_tag = {'pad': 0, 'LOCATION_HOMENUMBER': 1, 'LOCATION_STREET': 2, 'LOCATION_WARD': 3, 'LOCATION_DISTRICT': 4, 'LOCATION_PROVINCE': 5, 'LOCATION_COUNTRY': 6, 'LOCATION_POSTCODE': 7, 'LOCATION_NER': 8, 'OBJ': 9, 'OBJ_FEATURE': 10, 'PRE': 11, 'UNKNOW': 12 }
+# dic_of_tag = {'pad': 0, 'LOCATION_HOMENUMBER': 1, 'LOCATION_STREET': 2, 'LOCATION_WARD': 3, 'LOCATION_DISTRICT': 4, 'LOCATION_PROVINCE': 5, 'LOCATION_COUNTRY': 6, 'LOCATION_POSTCODE': 7, 'LOCATION_NER': 8, 'OBJ': 9, 'OBJ_FEATURE': 10, 'PRE': 11, 'UNKNOW': 12 }
 len_of_dic_tag = len(dic_of_tag)
 #===========================encode tag_list by dic_of_tags================
 def encode_Tag_list_by_Dic_of_tags(tag_list,dic,len_of_a_sentence):

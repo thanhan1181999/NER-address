@@ -19,8 +19,8 @@ def map_number_and_punct(word):
       if len(word)>1 and num_of_seperate>2:
         return u'<hem>'
 
-    if re.match(r"^[0-9]{2}0{3}$", word):
-        return u'<postcode>'
+    # if re.match(r"^[0-9]{2}0{3}$", word):
+    #     return u'<postcode>'
 
     if word.isnumeric():
         word = u'<number>'
@@ -107,10 +107,8 @@ name_of_out_file_val = 'val/char_encode.txt'
 # name_of_out_file_1 = 'char_encode_1.txt'
 # print("max_length_of_a_sentence_1 : {}".format(max_length_1))
 # print("max_length_of_a_word_1     : {}".format(max_length_of_a_word_1))
-print("max_length_of_a_sentence_train : {}".format(max_length_train))
-print("max_length_of_a_word_train     : {}".format(max_length_of_a_word_train))
-print("max_length_of_a_sentence_val : {}".format(max_length_val))
-print("max_length_of_a_word_val     : {}".format(max_length_of_a_word_val))
+print("num_sent_train : {}".format(num_sent_train))
+print("num_sent_val     : {}".format(num_sent_val))
 
 # word_list, tag_list, num_sent, max_length, max_length_of_a_word = read_conll_format('../4. train data/data_train.txt')
 # name_of_out_file = 'char_encode.txt'
