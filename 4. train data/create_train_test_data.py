@@ -186,23 +186,23 @@ train_dataset.close()
 train_dataset_no_tag.close()
 len_sen = len(data_tokens_val)
 
-train_dataset = open("test/data.txt","a",encoding='utf8')
-train_dataset_no_tag = open("test/data_no_tag.txt","a",encoding='utf8')
-for i in range(len(data_tokens_test)):
-  sentence_token = data_tokens_test[i]
-  sentence_tag   = data_tags_test[i]
-  for j in range(len(sentence_token)):
-    train_dataset.write(str(sentence_token[j]))
-    train_dataset_no_tag.write(str(sentence_token[j]))
-    train_dataset.write(' ')
-    train_dataset.write(str(sentence_tag[j]))
-    train_dataset.write('\n')
-    train_dataset_no_tag.write('\n')
-  train_dataset.write('\n')
-  train_dataset_no_tag.write('\n')
-train_dataset.close()
-train_dataset_no_tag.close()
-len_sen = len(data_tokens_test)
+# train_dataset = open("test/data.txt","a",encoding='utf8')
+# train_dataset_no_tag = open("test/data_no_tag.txt","a",encoding='utf8')
+# for i in range(len(data_tokens_test)):
+#   sentence_token = data_tokens_test[i]
+#   sentence_tag   = data_tags_test[i]
+#   for j in range(len(sentence_token)):
+#     train_dataset.write(str(sentence_token[j]))
+#     train_dataset_no_tag.write(str(sentence_token[j]))
+#     train_dataset.write(' ')
+#     train_dataset.write(str(sentence_tag[j]))
+#     train_dataset.write('\n')
+#     train_dataset_no_tag.write('\n')
+#   train_dataset.write('\n')
+#   train_dataset_no_tag.write('\n')
+# train_dataset.close()
+# train_dataset_no_tag.close()
+# len_sen = len(data_tokens_test)
 
 print("Có {} câu tìm kiếm gán nhãn để train".format(len(data_tokens_train)))
 print("Có {} câu tìm kiếm gán nhãn để val".format(len(data_tokens_val)))
