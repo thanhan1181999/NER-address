@@ -31,13 +31,19 @@ data_1_tokens, data_1_tags, data_1_len  = read_data("1_data_train_location_ner_f
 data_2_tokens, data_2_tags, data_2_len = read_data("2_data_train_location_form.txt")
 data_3_tokens, data_3_tags, data_3_len = read_data("3_data_train_location.txt")
 
-cautruyvan_1 = read_cautruyvan("1_cautruyvan.txt")
-cautruyvan_2 = read_cautruyvan("2_cautruyvan.txt")
-cautruyvan_3 = read_cautruyvan("3_cautruyvan.txt")
+data_1_tokens = data_1_tokens[0:1499]
+data_2_tokens = data_2_tokens[0:1499]
+data_3_tokens = data_3_tokens[0:1499]
+data_1_tags = data_1_tags[0:1499]
+data_2_tags = data_2_tags[0:1499]
+data_3_tags = data_3_tags[0:1499]
+cautruyvan_1 = read_cautruyvan("1_cautruyvan.txt")[0:1499]
+cautruyvan_2 = read_cautruyvan("2_cautruyvan.txt")[0:1499]
+cautruyvan_3 = read_cautruyvan("3_cautruyvan.txt")[0:1499]
 
-cautruyvan_token_1 = read_cautruyvan("1_cautruyvan_token.txt")
-cautruyvan_token_2 = read_cautruyvan("2_cautruyvan_token.txt")
-cautruyvan_token_3 = read_cautruyvan("3_cautruyvan_token.txt")
+cautruyvan_token_1 = read_cautruyvan("1_cautruyvan_token.txt")[0:1499]
+cautruyvan_token_2 = read_cautruyvan("2_cautruyvan_token.txt")[0:1499]
+cautruyvan_token_3 = read_cautruyvan("3_cautruyvan_token.txt")[0:1499]
 # chia data==========================================
 print("đang chia data...")
 size_test = 0.2
@@ -186,23 +192,23 @@ train_dataset.close()
 train_dataset_no_tag.close()
 len_sen = len(data_tokens_val)
 
-# train_dataset = open("test/data.txt","a",encoding='utf8')
-# train_dataset_no_tag = open("test/data_no_tag.txt","a",encoding='utf8')
-# for i in range(len(data_tokens_test)):
-#   sentence_token = data_tokens_test[i]
-#   sentence_tag   = data_tags_test[i]
-#   for j in range(len(sentence_token)):
-#     train_dataset.write(str(sentence_token[j]))
-#     train_dataset_no_tag.write(str(sentence_token[j]))
-#     train_dataset.write(' ')
-#     train_dataset.write(str(sentence_tag[j]))
-#     train_dataset.write('\n')
-#     train_dataset_no_tag.write('\n')
-#   train_dataset.write('\n')
-#   train_dataset_no_tag.write('\n')
-# train_dataset.close()
-# train_dataset_no_tag.close()
-# len_sen = len(data_tokens_test)
+train_dataset = open("test/data.txt","a",encoding='utf8')
+train_dataset_no_tag = open("test/data_no_tag.txt","a",encoding='utf8')
+for i in range(len(data_tokens_test)):
+  sentence_token = data_tokens_test[i]
+  sentence_tag   = data_tags_test[i]
+  for j in range(len(sentence_token)):
+    train_dataset.write(str(sentence_token[j]))
+    train_dataset_no_tag.write(str(sentence_token[j]))
+    train_dataset.write(' ')
+    train_dataset.write(str(sentence_tag[j]))
+    train_dataset.write('\n')
+    train_dataset_no_tag.write('\n')
+  train_dataset.write('\n')
+  train_dataset_no_tag.write('\n')
+train_dataset.close()
+train_dataset_no_tag.close()
+len_sen = len(data_tokens_test)
 
 print("Có {} câu tìm kiếm gán nhãn để train".format(len(data_tokens_train)))
 print("Có {} câu tìm kiếm gán nhãn để val".format(len(data_tokens_val)))
