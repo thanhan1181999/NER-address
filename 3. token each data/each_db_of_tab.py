@@ -164,6 +164,10 @@ for a in range(len(OBJ)):
     full_obj.append(OBJ_TOKEN[a][b])
     full_obj_tag.append(OBJ_TAG[a][b])
 
+  for b in range(len(OBJ_FEATURE_TOKEN[a])):
+    full_obj.append(OBJ_FEATURE_TOKEN[a][b])
+    full_obj_tag.append(OBJ_FEATURE_TAG[a][b])
+  
   FULL_OBJ_TOKEN.append( list(filter(lambda a: a != "", full_obj)) )
   FULL_OBJ_TAG.append( list(filter(lambda a: a != "", full_obj_tag)) )
 
