@@ -10,7 +10,7 @@ def read_cautruyvan(file_path):
 
 cautruyvan = read_cautruyvan("../4. train data/test/cautruyvan.txt")
 
-data_no_tag_new = "../6. train model/data_no_tag_pre.txt"
+data_no_tag_new = "../4. train data/test/data_no_tag_pre.txt"
 
 sens_tokend = []
 for sen in cautruyvan:

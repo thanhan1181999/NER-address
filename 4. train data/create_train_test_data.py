@@ -31,13 +31,19 @@ data_1_tokens, data_1_tags, data_1_len  = read_data("1_data_train_location_ner_f
 data_2_tokens, data_2_tags, data_2_len = read_data("2_data_train_location_form.txt")
 data_3_tokens, data_3_tags, data_3_len = read_data("3_data_train_location.txt")
 
-cautruyvan_1 = read_cautruyvan("1_cautruyvan.txt")
-cautruyvan_2 = read_cautruyvan("2_cautruyvan.txt")
-cautruyvan_3 = read_cautruyvan("3_cautruyvan.txt")
+data_1_tokens = data_1_tokens[0:1499]
+data_2_tokens = data_2_tokens[0:1499]
+data_3_tokens = data_3_tokens[0:1499]
+data_1_tags = data_1_tags[0:1499]
+data_2_tags = data_2_tags[0:1499]
+data_3_tags = data_3_tags[0:1499]
+cautruyvan_1 = read_cautruyvan("1_cautruyvan.txt")[0:1499]
+cautruyvan_2 = read_cautruyvan("2_cautruyvan.txt")[0:1499]
+cautruyvan_3 = read_cautruyvan("3_cautruyvan.txt")[0:1499]
 
-cautruyvan_token_1 = read_cautruyvan("1_cautruyvan_token.txt")
-cautruyvan_token_2 = read_cautruyvan("2_cautruyvan_token.txt")
-cautruyvan_token_3 = read_cautruyvan("3_cautruyvan_token.txt")
+cautruyvan_token_1 = read_cautruyvan("1_cautruyvan_token.txt")[0:1499]
+cautruyvan_token_2 = read_cautruyvan("2_cautruyvan_token.txt")[0:1499]
+cautruyvan_token_3 = read_cautruyvan("3_cautruyvan_token.txt")[0:1499]
 # chia data==========================================
 print("đang chia data...")
 size_test = 0.2
