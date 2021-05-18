@@ -99,9 +99,9 @@ int_to_char = int_to_char(char_vocab_data)
 #   print(str(key)+" : "+str(int_to_char[key]))
 
 # define input string
-word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format('../4. train data/train/data.txt')
+word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format('train/data.txt')
 name_of_out_file_train = 'train/char_encode.txt'
-word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format('../4. train data/val/data.txt')
+word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format('val/data.txt')
 name_of_out_file_val = 'val/char_encode.txt'
 # word_list_1, tag_list_1, num_sent_1, max_length_1, max_length_of_a_word_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
 # name_of_out_file_1 = 'char_encode_1.txt'

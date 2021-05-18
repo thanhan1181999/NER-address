@@ -11,10 +11,10 @@ class ProcessData:
     self.tokens = []
     self.tags = []
     # this is a data obj, fullobj, pre, location from txt file
-    self.obj_tokens, self.obj_tags, self.obj_len = self.read_data("../3. token each data/obj.txt")
-    self.pre_tokens, self.pre_tags, self.pre_len = self.read_data("../3. token each data/pre.txt")
+    self.obj_tokens, self.obj_tags, self.obj_len = self.read_data("../2. token each data/obj.txt")
+    self.pre_tokens, self.pre_tags, self.pre_len = self.read_data("../2. token each data/pre.txt")
     # self.location_tokens, self.location_tags, self.location_len = self.read_data("../tokened_data/location_caugiay.txt")
-    self.location_tokens, self.location_tags, self.location_len = self.read_data("../3. token each data/location_ner.txt")
+    self.location_tokens, self.location_tags, self.location_len = self.read_data("../2. token each data/location_ner.txt")
     #form sentence
     self.FORM_SENTENCE_TOKENS = [
       # basic 

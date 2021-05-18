@@ -8,17 +8,17 @@ def read_data(file_path):
     arr.append(line.lower())        
   return np.array(arr)
 #================================================================
-OBJ                 = read_data('../2. primary data/obj.txt')
+OBJ                 = read_data('../1. data csv/obj.txt')
 
-OBJ_FEATURE         = read_data('../2. primary data/feature.txt')
+OBJ_FEATURE         = read_data('../1. data csv/feature.txt')
 
-PRE                 = read_data('../2. primary data/pre.txt')
+PRE                 = read_data('../1. data csv/pre.txt')
 
-LOCATION_NER        = read_data('../2. primary data/ner.txt')
+LOCATION_NER        = read_data('../1. data csv/ner.txt')
 
-LOCATION_SPECIAL    = read_data('../2. primary data/location_special.txt')
+LOCATION_SPECIAL    = read_data('../1. data csv/location_special.txt')
 
-link_file_json_of_location = '../2. primary data/caugiay_processed.json'
+link_file_json_of_location = '../1. data csv/caugiay_processed.json'
 
 # một vài hàm cần dùng ===========================================
 # hàm trả về token các phần tử trong 1 mảng

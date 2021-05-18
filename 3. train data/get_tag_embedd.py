@@ -68,12 +68,12 @@ def read_conll_format(input_file):
 # word_list_1, tag_list_1, num_sent_1, max_length_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
 # name_of_out_file_1 = 'tag_embedd_1.txt'
 
-word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format('../4. train data/train/data.txt')
+word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format('train/data.txt')
 name_of_out_file_train = 'train/tag_embedd.txt'
-word_list_val, tag_list_val, num_sent_val, max_length_val = read_conll_format('../4. train data/val/data.txt')
+word_list_val, tag_list_val, num_sent_val, max_length_val = read_conll_format('val/data.txt')
 name_of_out_file_val = 'val/tag_embedd.txt'
 
-word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format('../4. train data/test/data.txt')
+word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format('test/data.txt')
 name_of_out_file_test = 'test/tag_embedd.txt'
 
 print("num_sent_train : {}".format(num_sent_train))

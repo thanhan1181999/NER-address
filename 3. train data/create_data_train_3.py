@@ -6,7 +6,7 @@ import random
 
 class ProcessData:
   def __init__(self):
-    self.location_tokens, self.location_tags, self.location_len = self.read_data("../3. token each data/location.txt")
+    self.location_tokens, self.location_tags, self.location_len = self.read_data("../2. token each data/location.txt")
 
   #read file
   def read_data(self,file_path):

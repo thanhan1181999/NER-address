@@ -8,9 +8,9 @@ def read_cautruyvan(file_path):
     sens.append(line.lower())  
   return sens
 
-cautruyvan = read_cautruyvan("../4. train data/test/cautruyvan.txt")
+cautruyvan = read_cautruyvan("../3. train data/test/cautruyvan.txt")
 
-data_no_tag_new = "../4. train data/test/data_no_tag_pre.txt"
+data_no_tag_new = "../3. train data/test/data_no_tag_pred.txt"
 
 sens_tokend = []
 for sen in cautruyvan:
@@ -41,7 +41,7 @@ def read_data(input_file):
                 word_list.append(words)
                 words = []
     return word_list
-sens_tokend_true = read_data("../4. train data/test/data_no_tag.txt")
+sens_tokend_true = read_data("../3. train data/test/data_no_tag.txt")
 
 number_of_sens_has_diff_length = 0
 
@@ -69,4 +69,4 @@ print("number_of_sens_has_diff_length "+ str(number_of_sens_has_diff_length))
 print("number_of_sens_true "+ str(number_of_sens_true))
 print("number_of_sens_has_same_length_but_false "+ str(number_of_sens_has_same_length_but_false))
 ti_le = round(100*number_of_sens_true/(number_of_sens_true+number_of_sens_has_diff_length+number_of_sens_has_same_length_but_false),2)
-print("tỉ lệ số câu tách chính xác/ số câu tách sai : {}".format(ti_le) )
+print("tỉ lệ số câu tách chính xác/ số câu tách : {}".format(ti_le) )

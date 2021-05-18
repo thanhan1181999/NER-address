@@ -1,6 +1,0 @@
-có 3 tập dữ liệu train nhỏ:
-  câu tìm kiếm là địa chỉ đơn giản 
-  câu tìm kiếm phức tạp tạo từ địa chỉ đơn giản
-  câu tìm kiếm phức tạp tạo từ địa chỉ được đặt tên
-
-concate_sentence.py dùng để tạo câu tìm kiếm: nhằm mục đích huấn luyện lại bộ tách từ RDR

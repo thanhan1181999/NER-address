@@ -77,7 +77,7 @@ for index in range(len(data)):
     #   caugiay_ner.append(name[0:idx])
 
 # export to file
-ner_file = open("../2. primary data/ner.txt","a",encoding='utf8')
+ner_file = open("ner.txt","a",encoding='utf8')
 for i in range(len(caugiay_ner)):
   ner_file.write(str(caugiay_ner[i]))
   ner_file.write('\n')
@@ -285,7 +285,7 @@ for index in range(len(data)):
 print("Sau khi lọc, còn lại {} bản ghi".format(len(need_data['caugiay'])))
 
 print("Đang lưu ra file...")
-with open('../2. primary data/caugiay_processed.json', 'w',encoding='utf8') as outfile:
+with open('caugiay_processed.json', 'w',encoding='utf8') as outfile:
   json.dump(need_data, outfile,ensure_ascii=False)
 print("Lưu thành công")
 # ================END BƯỚC 4 loại bỏ trùng lặp và lưu file=======================
