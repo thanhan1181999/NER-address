@@ -167,8 +167,8 @@ class ProcessData:
   #============== print to file =============================
   def export(self):
     # lưu dữ liệu train với các câu tìm kiếm có form từ location
-    train_dataset = open("2_data_train_location_form.txt","a",encoding='utf8')
-    train_dataset_no_tag = open("2_data_train_no_tag_location_form.txt","a",encoding='utf8')
+    train_dataset = open("all data/2_data_train_location_form.txt","a",encoding='utf8')
+    train_dataset_no_tag = open("all data/2_data_train_no_tag_location_form.txt","a",encoding='utf8')
     for i in range(len(self.tokens)):
       sentence_token = self.tokens[i]
       sentence_tag   = self.tags[i]

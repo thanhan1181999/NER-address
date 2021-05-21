@@ -13,15 +13,15 @@ def read_data(input_file):
                 words = []
     return word_list
 
-word_list_3 = read_data("3_data_train_no_tag_location.txt")
-word_list_2 = read_data("2_data_train_no_tag_location_form.txt")
-word_list_1 = read_data("1_data_train_no_tag_location_ner_form.txt")
-outfile_3_1 = "3_cautruyvan_token.txt"
-outfile_3_2 = "3_cautruyvan.txt"
-outfile_2_1 = "2_cautruyvan_token.txt"
-outfile_2_2 = "2_cautruyvan.txt"
-outfile_1_1 = "1_cautruyvan_token.txt"
-outfile_1_2 = "1_cautruyvan.txt"
+word_list_3 = read_data("all data/3_data_train_no_tag_location.txt")
+word_list_2 = read_data("all data/2_data_train_no_tag_location_form.txt")
+word_list_1 = read_data("all data/1_data_train_no_tag_location_ner_form.txt")
+outfile_3_1 = "all data/3_cautruyvan_token.txt"
+outfile_3_2 = "all data/3_cautruyvan.txt"
+outfile_2_1 = "all data/2_cautruyvan_token.txt"
+outfile_2_2 = "all data/2_cautruyvan.txt"
+outfile_1_1 = "all data/1_cautruyvan_token.txt"
+outfile_1_2 = "all data/1_cautruyvan.txt"
 
 # dữ liệu train 3=======================================
 # câu sau khi token=======
@@ -166,6 +166,8 @@ tenduong.close()
 #   tenduong.write('\n')
 
 # tenduong.close()
+
+
 
 
 

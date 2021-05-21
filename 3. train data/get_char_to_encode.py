@@ -1,3 +1,9 @@
+# với mỗi cục dữ liệu
+# lấy link của train, test/data.txt
+# def char_to_encode(link1, link2, out1, out2):
+#   đọc file
+#   char_encode_word_list
+
 import numpy as np
 import random
 from numpy import argmax
@@ -99,21 +105,21 @@ int_to_char = int_to_char(char_vocab_data)
 #   print(str(key)+" : "+str(int_to_char[key]))
 
 # define input string
-word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format('train/data.txt')
-name_of_out_file_train = 'train/char_encode.txt'
-word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format('val/data.txt')
-name_of_out_file_val = 'val/char_encode.txt'
+# word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format('train/data.txt')
+# name_of_out_file_train = 'train/char_encode.txt'
+# word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format('val/data.txt')
+# name_of_out_file_val = 'val/char_encode.txt'
 # word_list_1, tag_list_1, num_sent_1, max_length_1, max_length_of_a_word_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
 # name_of_out_file_1 = 'char_encode_1.txt'
 # print("max_length_of_a_sentence_1 : {}".format(max_length_1))
 # print("max_length_of_a_word_1     : {}".format(max_length_of_a_word_1))
-print("num_sent_train : {}".format(num_sent_train))
-print("num_sent_val     : {}".format(num_sent_val))
+# print("num_sent_train : {}".format(num_sent_train))
+# print("num_sent_val     : {}".format(num_sent_val))
 
 # word_list, tag_list, num_sent, max_length, max_length_of_a_word = read_conll_format('../4. train data/data_train.txt')
 # name_of_out_file = 'char_encode.txt'
 
-print(max_length_of_a_word_train)
+# print(max_length_of_a_word_train)
 max_length_of_a_sentence = 42
 max_length_of_a_word     = 32
 
@@ -160,8 +166,30 @@ def char_encode_word_list(word_list,max_length_of_a_sentence,max_length_of_a_wor
 
 # char_encode_1 = char_encode_word_list(word_list_1,42,32,name_of_out_file_1)
 
-char_encode_train = char_encode_word_list(word_list_train,42,32,name_of_out_file_train)
+# char_encode_train = char_encode_word_list(word_list_train,42,32,name_of_out_file_train)
 
-char_encode_val = char_encode_word_list(word_list_val,42,32,name_of_out_file_val)
+# char_encode_val = char_encode_word_list(word_list_val,42,32,name_of_out_file_val)
 
 # char_encode = char_encode_word_list(word_list,42,32,name_of_out_file)
+
+
+# lấy link của train, test/data.txt
+# def char_to_encode(link1, link2, out1, out2):
+#   đọc file
+#   char_encode_word_list
+
+word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format('all data/2_data_train_location_form.txt')
+import math
+length = num_sent_train
+max_sen = 1500
+for index in range(math.ceil(length/max_sen)):
+  link_train = "split data/data_{}/train/data.txt".format(index)
+  link_val = "split data/data_{}/val/data.txt".format(index)
+  out_train = "split data/data_{}/train/char_encode.txt".format(index)
+  out_val = "split data/data_{}/val/char_encode.txt".format(index)
+  word_list_train, tag_list_train, num_sent_train, max_length_train, max_length_of_a_word_train = read_conll_format(link_train)
+  word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format(link_val)
+  char_encode_train = char_encode_word_list(word_list_train,42,32,out_train)
+  char_encode_val = char_encode_word_list(word_list_val,42,32,out_val)
+
+

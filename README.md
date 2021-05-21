@@ -17,6 +17,7 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python create_data_train_3.py
   - python concate_sentence.py
   - python create_train_test_data.py
+  - python concate_all_data_token.py
   - Train lại bộ tách từ với các câu tìm kiếm trong dữ liệu huấn luyện
       - javac -encoding UTF-8 DataPreprocessor.java
       - java DataPreprocessor train/Train_gold.txt

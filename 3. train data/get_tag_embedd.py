@@ -68,17 +68,17 @@ def read_conll_format(input_file):
 # word_list_1, tag_list_1, num_sent_1, max_length_1 = read_conll_format('../4. train data/1_data_train_location_ner_form.txt')
 # name_of_out_file_1 = 'tag_embedd_1.txt'
 
-word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format('train/data.txt')
-name_of_out_file_train = 'train/tag_embedd.txt'
-word_list_val, tag_list_val, num_sent_val, max_length_val = read_conll_format('val/data.txt')
-name_of_out_file_val = 'val/tag_embedd.txt'
+# word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format('train/data.txt')
+# name_of_out_file_train = 'train/tag_embedd.txt'
+# word_list_val, tag_list_val, num_sent_val, max_length_val = read_conll_format('val/data.txt')
+# name_of_out_file_val = 'val/tag_embedd.txt'
 
-word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format('test/data.txt')
-name_of_out_file_test = 'test/tag_embedd.txt'
+# word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format('test/data.txt')
+# name_of_out_file_test = 'test/tag_embedd.txt'
 
-print("num_sent_train : {}".format(num_sent_train))
-print("num_sent_val     : {}".format(num_sent_val))
-print("num_sent_test : {}".format(num_sent_test))
+# print("num_sent_train : {}".format(num_sent_train))
+# print("num_sent_val     : {}".format(num_sent_val))
+# print("num_sent_test : {}".format(num_sent_test))
 #============================create dic of tag================================
 # def dict_of_tags(tag_list):
 #     dic = {'pad': 0}
@@ -118,12 +118,12 @@ def encode_Tag_list_by_Dic_of_tags(tag_list,dic,len_of_a_sentence):
 # print(tag_list_encode_2.shape)
 # tag_list_encode_3 = encode_Tag_list_by_Dic_of_tags(tag_list_3,dic_of_tag,42)
 # print(tag_list_encode_3.shape)
-tag_list_train_encode = encode_Tag_list_by_Dic_of_tags(tag_list_train,dic_of_tag,42)
-tag_list_val_encode = encode_Tag_list_by_Dic_of_tags(tag_list_val,dic_of_tag,42)
-tag_list_test_encode = encode_Tag_list_by_Dic_of_tags(tag_list_test,dic_of_tag,42)
-print(tag_list_train_encode.shape)
-print(tag_list_val_encode.shape)
-print(tag_list_test_encode.shape)
+# tag_list_train_encode = encode_Tag_list_by_Dic_of_tags(tag_list_train,dic_of_tag,42)
+# tag_list_val_encode = encode_Tag_list_by_Dic_of_tags(tag_list_val,dic_of_tag,42)
+# tag_list_test_encode = encode_Tag_list_by_Dic_of_tags(tag_list_test,dic_of_tag,42)
+# print(tag_list_train_encode.shape)
+# print(tag_list_val_encode.shape)
+# print(tag_list_test_encode.shape)
 #==========================create one hot vector from tag_encode==========
 def create_onehot(sens_encodes, tag_dim, num_word_in_sentence,name_of_out_file):
     X = np.zeros([len(sens_encodes), num_word_in_sentence, tag_dim])
@@ -145,9 +145,36 @@ def create_onehot(sens_encodes, tag_dim, num_word_in_sentence,name_of_out_file):
 # tag_onehot_3 = create_onehot(tag_list_encode_3, tag_dim = 14, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_3)
 # print(tag_onehot_3.shape)
 
-tag_onehot_train = create_onehot(tag_list_train_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_train)
-print(tag_onehot_train.shape)
-tag_onehot_val = create_onehot(tag_list_val_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_val)
-print(tag_onehot_val.shape)
-tag_onehot_test = create_onehot(tag_list_test_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_test)
-print(tag_onehot_test.shape)
+# tag_onehot_train = create_onehot(tag_list_train_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_train)
+# print(tag_onehot_train.shape)
+# tag_onehot_val = create_onehot(tag_list_val_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_val)
+# print(tag_onehot_val.shape)
+# tag_onehot_test = create_onehot(tag_list_test_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = name_of_out_file_test)
+# print(tag_onehot_test.shape)
+
+word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format('all data/2_data_train_location_form.txt')
+import math
+length = num_sent_train
+max_sen = 1500
+for index in range(math.ceil(length/max_sen)):
+  print("data {}".format(index))
+  
+  link_train = "split data/data_{}/train/data.txt".format(index)
+  link_val = "split data/data_{}/val/data.txt".format(index)
+  link_test = "split data/data_{}/test/data.txt".format(index)
+  out_train = "split data/data_{}/train/tag_embedd.txt".format(index)
+  out_val = "split data/data_{}/val/tag_embedd.txt".format(index)
+  out_test = "split data/data_{}/test/tag_embedd.txt".format(index)
+
+  word_list_train, tag_list_train, num_sent_train, max_length_train = read_conll_format(link_train)
+  word_list_val, tag_list_val, num_sent_val, max_length_val = read_conll_format(link_val)
+  word_list_test, tag_list_test, num_sent_test, max_length_test = read_conll_format(link_test)
+
+  tag_list_train_encode = encode_Tag_list_by_Dic_of_tags(tag_list_train,dic_of_tag,42)
+  tag_list_val_encode = encode_Tag_list_by_Dic_of_tags(tag_list_val,dic_of_tag,42)
+  tag_list_test_encode = encode_Tag_list_by_Dic_of_tags(tag_list_test,dic_of_tag,42)
+
+  tag_onehot_train = create_onehot(tag_list_train_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = out_train)
+  tag_onehot_val = create_onehot(tag_list_val_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = out_val)
+  tag_onehot_test = create_onehot(tag_list_test_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = out_test)
+  
