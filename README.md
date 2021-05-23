@@ -18,25 +18,30 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python concate_sentence_and_token_sentense.py
   - python create_train_test_data.py
   - Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
+
+        - cài đặt java 1.8 và python 2.7
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
         - cd train
         - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
         - lấy file "RDRsegmenter/train/Train_gold.txt.RAW.Init.RDR" đổi tên thành "wordsegmenter.rdr", thay thế cho file "models/wordsegmenter/wordsegmenter.rdr"
+  
   - python create_token_test_data.py để tách câu tìm kiếm của dữ liệu test
 
 4. Lấy char_encode, word_embedd, char_embedd của dữ liệu train, dữ liệu val, dữ liệu test
   - python get_char_to_encode.py
   - python get_tag_embedd.py
   - chạy get_word_embedd_all_data.ipynb trên colab
-          - mỗi tập dữ liệu train, cần các file 
-                - data_no_tag.txt của dữ liệu train, valentine
-                - data_no_tag_pred.txt của dữ liệu test
+
+        mỗi tập dữ liệu train, cần các file 
+              - data_no_tag.txt của dữ liệu train, valentine
+              - data_no_tag_pred.txt của dữ liệu test
 
 5. Huấn luyện mô hình
   - cd 4.\ train\ model
   - chạy model_all_data.ipynb trên colab
-        - cần setup link thư mục split data và link lưu model
+
+        cần setup link thư mục split data và link lưu model
 
 6. Đánh giá mô hình
   - chạy evaluate_model_with_validate_all_data.ipynb trên colab
@@ -80,6 +85,8 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   [cc.vi.300.bin](https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.vi.300.bin.gz) là mô hình CBOW Word vectors được xây dựng sẵn của facebook
 
   [Công cụ tách từ tiếng việt VNcoreNLP](https://github.com/vncorenlp/VnCoreNLP), lấy thư mục models
+
+  [Công cụ tách từ tiếng việt RDR có thể train lại](https://github.com/datquocnguyen/RDRsegmenter), lấy thư mục RDRsegmenter
       
   [char_vocab_VISCII](https://drive.google.com/file/d/17RPRvk6A0i9TPiqdzsaFY0Z-k260e_Kw/view?usp=sharing)
       
@@ -87,9 +94,11 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 
 ## I. Xử lý dữ liệu Cầu Giấy
 ### Thực hiện:
-  cd 1. data csv
-  python process_caugiay_data.py
-  python check_caugiay_data.py
+
+      cd 1. data csv
+      python process_caugiay_data.py
+      python check_caugiay_data.py
+
 ### Kết quả:
     cho ra 2 file gồm:
       ner.txt lưu tên của các đối tượng được đặt tên
@@ -147,17 +156,24 @@ graph LR
 ## III. Tạo dữ liệu huấn luyện
 ### Thực hiện:
       cd 4.\ train\ data
+
       python create_data_train_1.py
+
       python create_data_train_2.py
+
       python create_data_train_3.py
+
       python concate_sentence_and_token_sentense.py
+
       python create_train_test_data.py
+
       Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
         - cd train
         - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
         - lấy file "RDRsegmenter/train/Train_gold.txt.RAW.Init.RDR" đổi tên thành "wordsegmenter.rdr", thay thế cho file "models/wordsegmenter/wordsegmenter.rdr"
+
       python create_token_test_data.py để tách câu tìm kiếm của dữ liệu test
 ### Kết quả: 
     thư mục all data chứa dữ liệu train chia theo 3 loại câu tìm kiếm
