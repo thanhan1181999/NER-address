@@ -3,3 +3,7 @@
 /3. token each data1
 *.txt
 
+!/1. data csv/*.txt
+!/1. data csv/caugiay.csv
+!/models/readme
+

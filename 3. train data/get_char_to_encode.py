@@ -143,7 +143,7 @@ def char_encode_word_list(word_list,max_length_of_a_sentence,max_length_of_a_wor
         try:
           word_encoded[k]= char_to_int[char]
         except:
-          print("error : " + str(char)+" "+str(word)+" "+str(len(word)))
+          # print("error : " + str(char)+" "+str(word)+" "+str(len(word)))
           word_encoded[k]= char_to_int['[unk]']
 
       # sentence encoded
@@ -183,6 +183,7 @@ import math
 length = num_sent_train
 max_sen = 1500
 for index in range(math.ceil(length/max_sen)):
+  print("data {}".format(index))
   link_train = "split data/data_{}/train/data.txt".format(index)
   link_val = "split data/data_{}/val/data.txt".format(index)
   out_train = "split data/data_{}/train/char_encode.txt".format(index)
@@ -191,5 +192,6 @@ for index in range(math.ceil(length/max_sen)):
   word_list_val, tag_list_val, num_sent_val, max_length_val, max_length_of_a_word_val = read_conll_format(link_val)
   char_encode_train = char_encode_word_list(word_list_train,42,32,out_train)
   char_encode_val = char_encode_word_list(word_list_val,42,32,out_val)
+  print("----------------------")
 
 

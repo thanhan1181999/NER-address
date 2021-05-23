@@ -1,0 +1,7 @@
+thư mục chứa dữ liệu  địa chỉ csv
+
+chạy python process_caugiay_data.py cho ra 2 file:
+  ner.txt
+  caugiay_processed.json
+
+chạy python check_caugiay_data.py để check file "caugiay_processed.json" vừa xử lý

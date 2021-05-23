@@ -1,0 +1,427 @@
+sân bay
+phi trường
+quán ba
+quán bar
+vũ trường
+quán rượu
+nhà hàng
+quán thịt nướng
+quán bbq
+quán bia
+quán bia hơi
+quán cà phê
+vòi nước uống
+quán ăn nhanh
+cửa hàng đồ ăn nhanh
+khu ăn uống
+cửa hàng kem
+tiệm kem
+quán kem
+nơi bán kem
+trường học
+trường đại học
+trường dạy lái xe
+trường mẫu giáo
+mẫu giáo
+trường tiểu học
+tiểu học
+trường ngôn ngữ
+trường ngoại ngữ
+thư viện
+thư viện công cộng
+khu vui chơi
+trường âm nhạc
+trường trung học
+trường trung học cơ sở
+trường cấp hai
+trường đại học
+bãi đỗ xe
+nơi đậu xe
+chỗ đậu xe đạp
+chỗ đậu xe máy
+chỗ đậu ô tô
+quán sửa xe
+chỗ sửa xe
+chỗ thuê xe
+chỗ thuê thuyền
+quán rửa xe
+chỗ rửa xe
+trạm xe bus
+điểm xe bus
+điểm dừng xe bus
+chỗ đợi xe bus
+chỗ sạc xe điện
+nguồn điện
+bến xe
+bến tàu
+trạm xăng
+cây xăng
+chỗ đổ xăng
+lối vào bãi đỗ xe
+lối ra bãi đỗ xe
+ATM
+cây ATM
+máy rút tiền
+ngân hàng
+nhà băng
+cơ sở y tế
+bệnh viện
+bệnh viện nha khoa
+nhà thuốc
+hiệu thuốc
+tiệm thuốc
+nhà dưỡng lão
+nhà thuốc thú y
+bệnh viện thú y
+trung tâm nghệ thuật
+nhà hát lớn
+hội trường lớn
+nhà chứa
+sòng bạc
+rạp chiếu phim
+đài phun nước
+khách sạn
+khách sạn tình yêu
+hộp đêm
+tủ sách công cộng
+đài truyền hình
+phòng thu âm
+studio
+học viện
+khu chăn nuôi
+nông trại
+nơi nhân giống động vật
+khu bảo tồn động vật
+tiệm bánh mì
+ghế dài
+ghế đá
+trung tâm hội nghị
+tòa án
+lò hỏa táng
+đường chè
+bãi tha ma
+nghĩa trang
+bể bơi
+nhà vệ sinh công cộng
+đại sứ quán
+lãnh sự quán
+văn phòng ngoại giao
+trạm cứu hỏa
+nơi tổ chức tang lễ
+phòng tập gym
+hồ bơi
+chợ
+siêu thị
+nơi buôn bán
+tu viện
+nhà thờ
+đồn cảnh sát
+bưu điện
+văn phòng giao hàng
+nhà giam
+nhà tù
+suối nước nóng
+bãi biển
+khu tham quan
+vườn quốc gia
+cơ sở tái chế
+khu tị nạn
+bãi rác
+nơi tập kết rác thải
+nhà tắm hơi
+nơi trú ẩn
+nhà tắm công cộng
+bốt điện thoại
+nhà vệ sinh công cộng
+tòa thị chính
+máy bán hàng tự động
+thùng rác
+mương
+đường mương
+hàng rào
+đường tàu
+đường ray
+cột mốc chủ quyền
+cổng thông xe
+trạm thu phí
+đường cấm
+bốt cảnh sát
+ranh giới
+khu bảo tồn
+vườn quốc gia
+bãi biển
+bãi tắm
+bưu điện
+khu di tích
+di sản văn hóa
+bảo tàng
+nhà thờ
+chung cư
+căn hộ
+tòa nhà
+biệt thự
+tòa thị chính
+ủy ban nhân dân xã
+ủy ban nhân dân huyện
+ủy ban nhân dân tỉnh
+ký túc xá
+trang trại
+nông trại
+nông trường
+khu du lịch
+khu giải trí
+bãi đậu xe
+khách sạn
+khu trung tâm thương mại
+công trường
+nhà máy
+ki ốt
+quán bán lẻ
+bốt bán lẻ
+văn phòng
+quán rượu
+quán cà phê
+siêu thị
+chợ
+bãi rác
+thánh đường
+nhà thờ
+phòng cầu nguyện
+nhà dòng
+tu viện
+nhà thờ hồi giáo
+nhà thờ tôn giáo
+chùa
+đền
+ngôi đền
+ngôi chùa
+tiệm bánh
+tiệm bánh mỳ
+cửa hàng bánh
+cửa hàng bánh mỳ
+trạm cứu hỏa
+tòa nhà quốc hội
+toà án
+bệnh viện
+nhà thương
+nhà ga
+bến xe
+bến xe bus
+trường mẫu giáo
+trường mầm non
+trường cấp một
+trường cấp hai
+trường trung học
+trường trung học cơ sở
+trường cấp ba
+trường trung học phổ thông
+trường đại học
+học viện
+nhạc viện
+nhà trồng cây
+sân vận động
+gian hàng
+nhà chứa máy bay
+xưởng sửa chữa máy bay
+nhà sửa xe
+nhà cất xe
+bãi đỗ xe
+bãi đậu xe
+trạm biến áp
+thác nước
+hầm trú ẩn
+cây cầu
+trạm xăng
+trạm xe bus
+vườn tham quan
+tòa nhà chung cư
+căn hộ
+nông trường
+cánh đồng
+tiệm bánh mì
+tiệm đan giỏ
+vườn nuôi ong
+cửa hàng rèn
+nhà máy sản xuất bia
+quán rửa xe
+quán sơn xe
+cửa hàng đồng hồ
+phòng khám tư nhân
+phòng khám nha khoa
+lò rượu
+chỗ nấu rượu
+xưởng may
+trung tâm bảo hành
+cửa hàng dệt may
+cửa hàng hoa
+tiệm cầm đồ
+tiệm vàng
+quán bán đồ lưu niệm
+quán bán đồ handmade
+tiệm trang sức
+cửa hàng đồ nội thất
+cửa hàng sửa khóa
+quán chuyên làm cup
+phòng thu âm
+nơi làm gốm
+xưởng in ấn
+nhà máy in
+cửa hàng giày dép
+xưởng đóng giày
+cửa hàng quảng cáo
+hội chợ
+lò rèn
+cửa hàng bán đồ gia dụng
+nhà máy rượu
+nhà máy sữa
+trạm cứu thương
+sân bay
+phòng bảo vệ
+vòi chữa cháy
+bồn nước
+trạm cứu hộ
+hội trường lớn
+còi báo động
+vòi uống nước
+viện bảo tàng
+đường cao tốc
+đường cho xe đạp
+đường cho người đi bộ
+mương
+lối đi bộ
+con đường
+đường ưu tiên
+thang máy
+cột mốc
+trạm xe buýt
+biển báo
+gương phản chiếu
+đèn đỏ
+đèn báo giao thông
+vòng xuyến
+khu di tích
+hố bom
+di tích lịch sử
+đài tưởng niệm
+bãi tha ma
+đường chè
+núi đá
+núi đá vôi
+tòa tháp
+ngôi đền
+xưởng kỷ nghệ
+khu dân cư
+nhà ở
+khu chăn nuôi
+khu trồng trọt
+vườn hoa
+rừng
+đồng cỏ
+bãi cỏ
+vườn cây ăn quả
+vườn nho
+nghĩa trang
+bến xe
+nhà để xe
+chỗ để xe
+cánh đồng
+bãi rác
+doanh trại quân đội
+bến tàu
+hải cảng
+đường sắt
+khu vui chơi
+khu giải trí
+nhà thờ
+hồ nước
+sân gôn
+sở thú
+vườn thú
+trung tâm thể hình
+phòng tập thể hình
+phòng tập thể dục
+trường đua ngựa
+sân băng
+khu bảo tồn thiên nhiên
+công viên
+sân chơi
+sân chơi thể thao
+trung tâm thể thao
+sân vận động
+bể bơi
+công viên nước
+Đê
+bờ đê
+Cầu
+cây cầu
+cột cờ
+ngọn hải đăng
+núi
+núi đá
+núi đá vôi
+sân bay
+hầm trú ẩn
+doanh trại quân đội
+trại lính
+khu huấn luyện quân sự
+bãi đất hoang
+bãi biển
+bờ biển
+suối nước nóng
+núi lửa
+thung lũng
+hang động
+bãi đá
+cơ sở giáo dục
+đô thị
+khu đô thị
+thị trấn
+nông trại
+quảng trường
+Biển
+Sông
+dòng sông
+ga tàu
+nhà ga
+quán rượu
+quán bia
+quán bánh mì
+cửa hàng bánh mì
+cửa hàng đồ uống
+siêu thị mini
+Chợ
+cửa hàng bánh kẹo
+quán bún
+quán phở
+quán trà đá
+cửa hàng bách hóa
+trung tâm mua sắm
+siêu thị
+tiệm quần áo
+cửa hàng quần áo
+tiệm giày
+tiệm giày dép
+cửa hàng giày
+cửa hàng giày dép
+tiệm vàng
+tiệm cầm đồ
+tiệm may
+cửa hàng may vá
+cửa hàng tạp hóa
+quán cắt tóc
+nhà thuốc
+tiệm thuốc
+nhà thuốc tư nhân
+cửa hàng hoa
+siêu thị điện máy
+cửa hàng ô tô
+văn phòng phẩm
+tiệm giặt là
+chung cư
+viện bảo tàng
+khách sạn
+vườn bách thú
+con sông
+hồ
+xưởng đóng thuyền
+thác nước

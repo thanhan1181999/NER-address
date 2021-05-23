@@ -178,3 +178,4 @@ for index in range(math.ceil(length/max_sen)):
   tag_onehot_val = create_onehot(tag_list_val_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = out_val)
   tag_onehot_test = create_onehot(tag_list_test_encode, tag_dim = 13, num_word_in_sentence = 42,name_of_out_file = out_test)
   
+  print("----------------------")

@@ -15,27 +15,33 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python create_data_train_1.py
   - python create_data_train_2.py
   - python create_data_train_3.py
-  - python concate_sentence.py
+  - python concate_sentence_and_token_sentense.py
   - python create_train_test_data.py
-  - python concate_all_data_token.py
-  - Train lại bộ tách từ với các câu tìm kiếm trong dữ liệu huấn luyện
-      - javac -encoding UTF-8 DataPreprocessor.java
-      - java DataPreprocessor train/Train_gold.txt
-      - cd train
-      - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+  - Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
+        - javac -encoding UTF-8 DataPreprocessor.java
+        - java DataPreprocessor train/Train_gold.txt
+        - cd train
+        - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
+        - lấy file "RDRsegmenter/train/Train_gold.txt.RAW.Init.RDR" đổi tên thành "wordsegmenter.rdr", thay thế cho file "models/wordsegmenter/wordsegmenter.rdr"
   - python create_token_test_data.py để tách câu tìm kiếm của dữ liệu test
 
 4. Lấy char_encode, word_embedd, char_embedd của dữ liệu train, dữ liệu val, dữ liệu test
   - python get_char_to_encode.py
   - python get_tag_embedd.py
-  - chạy get_word_embedd.ipynb trên colab
+  - chạy get_word_embedd_all_data.ipynb trên colab
+          - mỗi tập dữ liệu train, cần các file 
+                - data_no_tag.txt của dữ liệu train, valentine
+                - data_no_tag_pred.txt của dữ liệu test
 
 5. Huấn luyện mô hình
-  - chạy model.ipynb trên colab
+  - cd 4.\ train\ model
+  - chạy model_all_data.ipynb trên colab
+        - cần setup link thư mục split data và link lưu model
 
 6. Đánh giá mô hình
-  - chạy evaluate_model_with_validate_data.ipynb trên colab
-  - chạy evaluate_model_with_test_data.ipynb trên colab
+  - chạy evaluate_model_with_validate_all_data.ipynb trên colab
+  - chạy evaluate_model_with_test_all_data.ipynb trên colab
+  - chạy show_result_evaluate_test_data.ipynb trên colab
 
 7. Sử dụng Model thông qua API Flask, Ngrok
   - chạy main_have_char_embedd.ipynb trên colab
@@ -83,12 +89,14 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
 ### Thực hiện:
   cd 1. data csv
   python process_caugiay_data.py
+  python check_caugiay_data.py
 ### Kết quả:
     cho ra 2 file gồm:
       ner.txt lưu tên của các đối tượng được đặt tên
       caugiay_processed.json là dữ liệu cầu giấy đã tiền xử lý
 ### Giải thích:
-    chương trình này sẽ xử lý dữ liệu dữ liệu cầu giấy csv
+    python process_caugiay_data.py sẽ xử lý dữ liệu dữ liệu cầu giấy csv
+    python check_caugiay_data.py sẽ check file "caugiay_processed.json" vừa xử lý
 
 ```mermaid
 graph LR
@@ -142,20 +150,42 @@ graph LR
       python create_data_train_1.py
       python create_data_train_2.py
       python create_data_train_3.py
-      python concate_sentence.py
+      python concate_sentence_and_token_sentense.py
       python create_train_test_data.py
-      Train lại bộ tách từ với các câu tìm kiếm trong dữ liệu huấn luyện
+      Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
         - cd train
         - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
-      python token_test_data.py để tách câu tìm kiếm của dữ liệu test
+        - lấy file "RDRsegmenter/train/Train_gold.txt.RAW.Init.RDR" đổi tên thành "wordsegmenter.rdr", thay thế cho file "models/wordsegmenter/wordsegmenter.rdr"
+      python create_token_test_data.py để tách câu tìm kiếm của dữ liệu test
 ### Kết quả: 
-    thư mục chứa dữ liệu train, validate, test (tỉ lệ 7:1:2), mỗi thư mục có các file:
+    thư mục all data chứa dữ liệu train chia theo 3 loại câu tìm kiếm
+
+    thư mục split data chứa dữ liệu train, validate, test (tỉ lệ 7:1:2), mỗi thư mục có các file:
       data.txt (dữ liệu huấn luyện gán nhãn đầy đủ)
       data_no_tag.txt (dữ liệu huấn luyện không có nhãn)
       cautruyvan.txt (câu truy vấn của dữ liệu huấn luyện)
       cautruyvan_token.txt (câu truy vấn của dữ liệu huấn luyện đã qua bộ tách từ)
+
+### Giải thích:
+    python create_data_train_1.py tạo ra dữ liệu train tạo từ ner
+    
+    python create_data_train_2.py tạo ra dữ liệu train tạo từ địa chỉ đơn giản
+    
+    python create_data_train_3.py tạo ra dữ liệu train là địa chỉ đơn giản
+    
+    python concate_sentence_and_token_sentense.py tạo câu tìm kiếm và câu tìm kiếm token
+    
+    python create_train_test_data.py 
+      - chia 3 dữ liệu train thành những tập dữ liệu nhỏ hơn để train
+      - ngoài ra tạo thêm "cautruyvan_token_to_train_RDR.txt", (đưa sẵn vào file "RDRsegmenter/train/Train_gold.txt") là tất cả các câu token của dữ liệu train
+    
+    Train lại bộ tách từ RDR của VncoreNLP để làm bộ tách từ cho những câu tìm kiếm của bộ test
+      Đầu vào là dữ liệu token của bộ train (cautruyvan_token_to_train_RDR.txt), đã được ghép thêm vào file "RDRsegmenter/train/Train_gold.txt"
+      Sau khi train xong RDR, lấy file "RDRsegmenter/train/Train_gold.txt.RAW.Init.RDR" đổi tên thành "wordsegmenter.rdr", thay thế cho file "models/wordsegmenter/wordsegmenter.rdr"
+    
+    python create_token_test_data.py token câu tìm kiếm của dữ liệu test bằng RDR đã train, tạo ra các file "data_no_tag_pred.txt"
 
 <div style='page-break-after:always;'></div>
 
@@ -163,8 +193,10 @@ graph LR
 ### Thực hiện:
       python get_tag_embedd.py
       python char_to_encode.py
-      chạy get_word_embedd.ipynb trên colab
-
+      chạy get_word_embedd_all_data.ipynb trên colab
+          - mỗi tập dữ liệu train, cần các file 
+              - data_no_tag.txt của dữ liệu train, valentine
+              - data_no_tag_pred.txt của dữ liệu test
 ### Kết quả
     word embedd, char encode, tag embedd của tập dữ liệu train, dữ liệu validate
     word embedd, tag embedd của dữ liệu test
@@ -179,7 +211,9 @@ graph LR
 
 ## V. Huấn luyện mô hình
 ### Thực hiện
-    Chạy model.ipynb trên colab
+    cd 4.\ train\ model
+    Chạy model_all_data.ipynb trên colab
+          - cần setup link thư mục split data và link lưu model
 ### Kết quả
     model đã train xong
 
@@ -188,8 +222,9 @@ graph LR
 ## VI. Đánh giá mô hình
 ### Thực hiện
 
-    chạy evaluate_model_with_validate_data.ipynb trên colab
-    chạy evaluate_model_with_test_data.ipynb trên colab
+  - chạy evaluate_model_with_validate_all_data.ipynb trên colab
+  - chạy evaluate_model_with_test_all_data.ipynb trên colab
+  - chạy show_result_evaluate_test_data.ipynb trên colab
 
 ### Kết quả
 

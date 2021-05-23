@@ -115,8 +115,8 @@ def split_each_data(index):
   end = arr[index][1]
   
   print("data {}".format(index))
-  print(begin)
-  print(end)
+  print("  {}".format(begin))
+  print("  {}".format(end))
 
   data_2_tokens_x = data_2_tokens[begin:end]
   data_3_tokens_x = data_3_tokens[begin:end]
@@ -157,7 +157,7 @@ def split_each_data(index):
   # print(len(data_2_tokens))
 
   # chia data==========================================
-  print("đang chia data...")
+  print("  đang chia data...")
 
   cautruyvan_1_rest, cautruyvan_1_test, cautruyvan_token_1_rest, cautruyvan_token_1_test, data_1_tokens_rest, data_1_tokens_test, data_1_tags_rest, data_1_tags_test   = train_test_split(cautruyvan_1_x, cautruyvan_token_1_x, data_1_tokens_x, data_1_tags_x, test_size=size_test)
   cautruyvan_2_rest, cautruyvan_2_test, cautruyvan_token_2_rest, cautruyvan_token_2_test, data_2_tokens_rest, data_2_tokens_test, data_2_tags_rest, data_2_tags_test   = train_test_split(cautruyvan_2_x, cautruyvan_token_2_x, data_2_tokens_x, data_2_tags_x, test_size=size_test)
@@ -219,7 +219,7 @@ def split_each_data(index):
   data_tags_test.extend(data_2_tags_test)
   data_tags_test.extend(data_3_tags_test)
   #~~~~~~~~~~~~~~~
-  print("đang ghi data...")
+  print("  đang ghi data...")
   dirName = "split data/data_{}/".format(index)
   # train
   # cautruyvan
@@ -248,9 +248,24 @@ def split_each_data(index):
   # câu truy vấn token
   cautruyvan_token_file = open(dirName+"train/cautruyvan_token.txt","a",encoding='utf8')
   for j in range(len(cautruyvan_token_train)):
+    cautruyvan_token_train[j] = cautruyvan_token_train[j].replace(" _"," ")
+    cautruyvan_token_train[j] = cautruyvan_token_train[j].replace(" _ "," ")
+    cautruyvan_token_train[j] = cautruyvan_token_train[j].replace("_ "," ")
     cautruyvan_token_file.write(str(cautruyvan_token_train[j]))
     cautruyvan_token_file.write('\n')
   cautruyvan_token_file.close()
+
+  all_cautruyvan_token_file = open("cautruyvan_token_to_train_RDR.txt","a",encoding='utf8')
+  for j in range(len(cautruyvan_token_train)):
+    all_cautruyvan_token_file.write(str(cautruyvan_token_train[j]))
+    all_cautruyvan_token_file.write('\n')
+  all_cautruyvan_token_file.close()
+
+  all_cautruyvan_token_file = open("../RDRsegmenter/train/Train_gold.txt","a",encoding='utf8')
+  for j in range(len(cautruyvan_token_train)):
+    all_cautruyvan_token_file.write(str(cautruyvan_token_train[j]))
+    all_cautruyvan_token_file.write('\n')
+  all_cautruyvan_token_file.close()
 
   cautruyvan_token_file = open(dirName+"val/cautruyvan_token.txt","a",encoding='utf8')
   for j in range(len(cautruyvan_token_val)):
