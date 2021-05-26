@@ -169,6 +169,7 @@ graph LR
       python create_train_test_data.py
 
       Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
+        - git clone https://github.com/datquocnguyen/RDRsegmenter
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
         - cd train
