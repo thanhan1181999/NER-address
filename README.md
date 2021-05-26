@@ -19,13 +19,14 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python create_train_test_data.py
   - Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
 
+        - git clone https://github.com/datquocnguyen/RDRsegmenter
         - cài đặt java 1.8 và python 2.7
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
         - cd train
         - python RDRsegmenter.py train Train_gold.txt.BI Train_gold.txt.RAW.Init
         - lấy file "RDRsegmenter/train/Train_gold.txt.RAW.Init.RDR" đổi tên thành "wordsegmenter.rdr", thay thế cho file "models/wordsegmenter/wordsegmenter.rdr"
-  
+
   - python create_token_test_data.py để tách câu tìm kiếm của dữ liệu test
 
 4. Lấy char_encode, word_embedd, char_embedd của dữ liệu train, dữ liệu val, dữ liệu test
