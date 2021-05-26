@@ -11,6 +11,7 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python each_db_of_tab.py
 
 3. Tạo dữ liệu huấn luyện
+  - git clone https://github.com/datquocnguyen/RDRsegmenter
   - cd 3.\ train\ data
   - python create_data_train_1.py
   - python create_data_train_2.py
@@ -19,7 +20,6 @@ link thư mục tại [AnNT/research](https://drive.google.com/drive/folders/1Tm
   - python create_train_test_data.py
   - Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
 
-        - git clone https://github.com/datquocnguyen/RDRsegmenter
         - cài đặt java 1.8 và python 2.7
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
@@ -156,6 +156,8 @@ graph LR
 
 ## III. Tạo dữ liệu huấn luyện
 ### Thực hiện:
+      git clone https://github.com/datquocnguyen/RDRsegmenter
+ 
       cd 4.\ train\ data
 
       python create_data_train_1.py
@@ -169,7 +171,7 @@ graph LR
       python create_train_test_data.py
 
       Train lại bộ tách từ RDR với các câu tìm kiếm trong dữ liệu huấn luyện
-        - git clone https://github.com/datquocnguyen/RDRsegmenter
+
         - javac -encoding UTF-8 DataPreprocessor.java
         - java DataPreprocessor train/Train_gold.txt
         - cd train
