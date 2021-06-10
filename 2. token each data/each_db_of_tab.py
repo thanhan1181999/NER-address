@@ -1,3 +1,6 @@
+import time
+start_time = time.time()
+
 from vncorenlp import VnCoreNLP
 annotator = VnCoreNLP("../VnCoreNLP-1.1.1.jar", annotators="wseg", max_heap_size='-Xmx500m')
 #read file=======================================================
@@ -165,13 +168,17 @@ for a in range(len(OBJ)):
     full_obj_tag.append(OBJ_TAG[a][b])
   # full_obj.append(OBJ_TOKEN[a])
   # full_obj_tag.append(OBJ_TAG[a])
-  
-  for b in range(len(OBJ_FEATURE_TOKEN[a])):
-    full_obj.append(OBJ_FEATURE_TOKEN[a][b])
-    full_obj_tag.append(OBJ_FEATURE_TAG[a][b])
-  
-  FULL_OBJ_TOKEN.append( list(filter(lambda a: a != "", full_obj)) )
-  FULL_OBJ_TAG.append( list(filter(lambda a: a != "", full_obj_tag)) )
+
+  if not ( OBJ_FEATURE_TOKEN[a][0]=="" ):
+    for b in range(len(OBJ_FEATURE_TOKEN[a])):
+      full_obj.append(OBJ_FEATURE_TOKEN[a][b])
+      full_obj_tag.append(OBJ_FEATURE_TAG[a][b])
+
+  # FULL_OBJ_TOKEN.append( list(filter(lambda a: a != "", full_obj)) )
+  # FULL_OBJ_TAG.append( list(filter(lambda a: a != "", full_obj_tag)) )
+
+  FULL_OBJ_TOKEN.append( full_obj )
+  FULL_OBJ_TAG.append( full_obj_tag )
 
 #========================open and write====================================
 print("saving to txt file ...")
@@ -255,10 +262,10 @@ dataset.close()
 # location_all là tất cả các location gồm:
 #       location(số nhà->postcode)
 #       location spicial
-for idx in range(len(LOCATION_SPECIAL_TAG)):
-  LOCATION_SPECIAL_TAG[idx] = [LOCATION_SPECIAL_TAG[idx]]
-for idx in range(len(LOCATION_SPECIAL_TOKEN)):
-  LOCATION_SPECIAL_TOKEN[idx] = [LOCATION_SPECIAL_TOKEN[idx]]
+# for idx in range(len(LOCATION_SPECIAL_TAG)):
+#   LOCATION_SPECIAL_TAG[idx] = [LOCATION_SPECIAL_TAG[idx]]
+# for idx in range(len(LOCATION_SPECIAL_TOKEN)):
+#   LOCATION_SPECIAL_TOKEN[idx] = [LOCATION_SPECIAL_TOKEN[idx]]
 
 # LOCATION_ALL_TAG = []
 # LOCATION_ALL_TAG.extend(LOCATION_SPECIAL_TAG)
@@ -283,3 +290,8 @@ print("Có {} ner.".format(len(LOCATION_NER)))
 # print("Có {} location_special.".format(len(LOCATION_SPECIAL)))
 print("Có {} location.".format(index_sen))
 # print("Có {} location_all.".format(len(LOCATION_ALL_TOKEN)))
+
+end_time = time.time()
+#tính thời gian chạy của thuật toán Python
+elapsed_time = end_time - start_time
+print ("thời gian chạy :{0}".format(elapsed_time) + "[sec]")
